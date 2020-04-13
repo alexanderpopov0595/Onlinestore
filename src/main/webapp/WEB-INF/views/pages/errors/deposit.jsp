@@ -1,0 +1,1 @@
+<p class="error">Deposit is already existing</p>

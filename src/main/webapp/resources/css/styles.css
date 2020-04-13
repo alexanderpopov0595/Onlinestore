@@ -1,0 +1,38 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Quicksand", sans-serif;
+}
+.grid-main{
+    display: grid;
+    grid-template-areas: "header"
+                         "nav"
+                         "main";
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 0.5fr 8fr;
+    height: 100vh;
+    padding: 10px;
+    background-color: #e9e9e9;
+}
+header {
+    grid-area: header;
+}
+nav {
+    grid-area: nav;
+}
+main{
+    grid-area: main;
+    background-color: white;
+}
+
+
+
+
+
+
+
+

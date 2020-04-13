@@ -1,0 +1,30 @@
+.grid-content{
+    display:grid;
+    grid-template-areas: "sidebar content";
+    grid-template-columns: 1fr 8fr;
+    grid-template-rows: 1fr;
+    height: 100%;
+}
+.sidebar{
+    grid-area: sidebar;
+}
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.content{
+    grid-area: content;
+}
+.content .form-input{
+    background: #fafafa;
+    border: 1px solid #eeeeee;
+    padding: 12px;
+    width: 70%;
+}
+
+.
+
+

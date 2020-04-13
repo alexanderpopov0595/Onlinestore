@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- Base Definition -->
+    <definition name="base-definition"  template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />
+        <put-attribute name="nav" value="/WEB-INF/views/tiles/template/defaultNav.jsp" />
+        <put-attribute name="main" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />
+        <put-list-attribute name="stylesheets">
+            <add-attribute value="header.css" />
+            <add-attribute value="nav.css" />
+            <add-attribute value="styles.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts">
+        </put-list-attribute>
+    </definition>
+
+    <!-- Home  -->
+    <definition name="home" extends="base-definition">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/home.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="gallery.css" />
+        </put-list-attribute>
+    </definition>
+
+
+    <!-- User Sign In form  -->
+    <definition name="users/signin" extends="base-definition">
+        <put-attribute name="title" value="Sign In" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/users/signin.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- User Sign Up form  -->
+    <definition name="users/signup" extends="base-definition">
+        <put-attribute name="title" value="Sign Up" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/users/signup.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="userFormScript.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <!-- User account  -->
+    <definition name="users/account" extends="base-definition">
+        <put-attribute name="title" value="Account" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/users/account.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="tabs.css" />
+            <add-attribute value="view.css" />
+            <add-attribute value="tables.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="tabsScript.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <!-- User update account  -->
+    <definition name="users/update" extends="base-definition">
+        <put-attribute name="title" value="Update account" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/users/update.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="account.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="userFormScript.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <!-- Deposit form  -->
+    <definition name="deposits/form" extends="base-definition">
+        <put-attribute name="title" value="Add deposit" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/deposits/form.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Deposit view  -->
+    <definition name="deposits/view" extends="base-definition">
+        <put-attribute name="title" value="Your deposit" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/deposits/view.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Deposit update  -->
+    <definition name="deposits/update" extends="base-definition">
+        <put-attribute name="title" value="Update deposit" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/deposits/update.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+    </definition>
+    <!-- Category form  -->
+    <definition name="categories/form" extends="base-definition">
+        <put-attribute name="title" value="Add category" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/categories/form.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="categoryFormScript.js" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Update category -->
+    <definition name="categories/update" extends="base-definition">
+        <put-attribute name="title" value="Update category" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/categories/update.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="categoryFormScript.js" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Category list -->
+    <definition name="categories/list" extends="base-definition">
+        <put-attribute name="title" value="Menu" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/categories/list.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true" >
+            <add-attribute value="main.css" />
+            <add-attribute value="forms.css" />
+            <add-attribute value="gallery.css" />
+            <add-attribute value="view.css" />
+        </put-list-attribute>
+    </definition>
+
+
+    <!-- Product list page -->
+    <definition name="products/list" extends="base-definition">
+        <put-attribute name="title" value="Products list" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/products/list.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="main.css" />
+            <add-attribute value="forms.css" />
+            <add-attribute value="gallery.css" />
+            <add-attribute value="view.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Product form page -->
+    <definition name="products/form" extends="base-definition">
+        <put-attribute name="title" value="Product information" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/products/form.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="productFormScript.js" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Update product -->
+    <definition name="products/update" extends="base-definition">
+        <put-attribute name="title" value="Update product" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/products/update.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="productFormScript.js" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Product  page -->
+    <definition name="products/view" extends="base-definition">
+        <put-attribute name="title" value="Product page" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/products/view.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="view.css" />
+            <add-attribute value="tabs.css" />
+            <add-attribute value="tables.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="tabsScript.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <!-- Product  search page -->
+    <definition name="products/search" extends="base-definition">
+        <put-attribute name="title" value="Product search" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/products/search.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="productFormScript.js" />
+            <add-attribute value="searchFormScript.js" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Cart  page -->
+    <definition name="cart" extends="base-definition">
+        <put-attribute name="title" value="Cart page" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/cart.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="view.css" />
+            <add-attribute value="tables.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Order form  page -->
+    <definition name="orders/form" extends="base-definition">
+        <put-attribute name="title" value="Order page" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/orders/form.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="tables.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="orderFormScript.js" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Order update  page -->
+    <definition name="orders/update" extends="base-definition">
+        <put-attribute name="title" value="Order page" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/orders/update.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="tables.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="orderFormScript.js" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Order view  page -->
+    <definition name="orders/view" extends="base-definition">
+        <put-attribute name="title" value="Order page" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/orders/view.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="view.css" />
+            <add-attribute value="tables.css" />
+            <add-attribute value="tabs.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="tabsScript.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <!-- Order list  page -->
+    <definition name="orders/list" extends="base-definition">
+        <put-attribute name="title" value="Orders list page" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/orders/list.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="tables.css" />
+            <add-attribute value="view.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- User order list  page -->
+    <definition name="orders/user" extends="base-definition">
+        <put-attribute name="title" value="Orders list page" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/orders/user.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+            <add-attribute value="tables.css" />
+            <add-attribute value="view.css" />
+            <add-attribute value="tabs.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="tabsScript.js"/>
+        </put-list-attribute>
+    </definition>
+
+
+    <!-- Product out of quantity error page -->
+    <definition name="errors/quantity" extends="base-definition">
+        <put-attribute name="title" value="Out of quantity" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/errors/quantity.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Out of balance error page -->
+    <definition name="errors/balance" extends="base-definition">
+        <put-attribute name="title" value="Out of balance" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/errors/balance.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+    </definition>
+    <!-- Already existing deposit page -->
+    <definition name="errors/deposit" extends="base-definition">
+        <put-attribute name="title" value="Deposit already exists" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/errors/deposit.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- 403 error page -->
+    <definition name="errors/403" extends="base-definition">
+        <put-attribute name="title" value="Access denied" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/errors/403.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="forms.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Top products list  -->
+    <definition name="sales/productsTop" extends="base-definition">
+        <put-attribute name="title" value="Top-10 products" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/sales/productsTop.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="main.css" />
+            <add-attribute value="forms.css" />
+            <add-attribute value="gallery.css" />
+            <add-attribute value="view.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- Top users list  -->
+    <definition name="sales/usersTop" extends="base-definition">
+        <put-attribute name="title" value="Top-10 users" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/sales/usersTop.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="main.css" />
+            <add-attribute value="forms.css" />
+            <add-attribute value="gallery.css" />
+            <add-attribute value="tables.css" />
+            <add-attribute value="view.css" />
+        </put-list-attribute>
+    </definition>
+
+    <!-- sales list  -->
+    <definition name="sales/list" extends="base-definition">
+        <put-attribute name="title" value="Sales statistic" />
+        <put-attribute name="main" value="/WEB-INF/views/pages/sales/list.jsp"/>
+        <put-list-attribute name="stylesheets" inherit="true">
+            <add-attribute value="main.css" />
+            <add-attribute value="forms.css" />
+            <add-attribute value="tables.css" />
+            <add-attribute value="view.css" />
+        </put-list-attribute>
+    </definition>
+
+
+</tiles-definitions>
