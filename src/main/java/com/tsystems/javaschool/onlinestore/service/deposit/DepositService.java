@@ -24,7 +24,7 @@ public interface DepositService {
 
     /**
      * Method returns deposit by user's login
-     * @param owner login
+     * @param login
      * @return deposit object
      */
     public Deposit selectDeposit(String login);

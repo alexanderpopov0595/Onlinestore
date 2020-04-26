@@ -1,7 +1,6 @@
 package com.tsystems.javaschool.onlinestore.dao.category;
 
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
-
 import java.util.List;
 
 /**
@@ -21,38 +20,47 @@ public interface CategoryDao {
      */
     public void updateCategory(Category category);
 
-    /*
-     * methods returns category by id
+    /**
+     * Methods returns category by id
+     * @param id
+     * @return
      */
     public Category selectCategory(long id);
 
-    /*
-     * methods returns category by category name
+    /**
+     * Methods returns category by category name
+     * @param name
+     * @return category
      */
     public Category selectCategory(String name);
 
-    /*
-     * method returns category list
+    /**
+     *  Method returns category list
+     * @return category list
      */
     public List<Category> selectCategoryList();
 
-    /*
-     * method deletes category
+    /**
+     * Method deletes category by id
+     * @param id
      */
     public void deleteCategory(long id);
 
-    /*
-     * method deletes category parameter
+    /**
+     * Method deletes category parameter
+     * @param id
      */
     public void deleteParameter(long id);
 
-    /*
-     * method deletes category products
+    /**
+     * Method deletes category products
+     * @param id
      */
     public void deleteCategoryProducts(long id);
 
-    /*
-     * method delete category parameter product details
+    /**
+     * Method delete category parameter product details
+     * @param id
      */
     public void deleteCategoryParameterProductDetails(long id);
 }

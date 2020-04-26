@@ -49,7 +49,6 @@
                        <a href="<c:url value="/orders/user/${user.id}"/>">
                                ${user.firstName} ${user.lastName}
                        </a>
-
                    </td>
                    <td>${user.birthday}</td>
                    <td>${user.email}</td>

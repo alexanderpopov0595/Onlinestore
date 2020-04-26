@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select login, password, true from users where login=?")
+                .usersByUsernameQuery("select login, password, true from users where login=? AND status='ACTIVE'")
                 .authoritiesByUsernameQuery(
                         "SELECT login, role FROM users WHERE login=?");
         auth.inMemoryAuthentication()

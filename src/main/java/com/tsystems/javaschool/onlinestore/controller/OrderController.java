@@ -29,17 +29,18 @@ import com.tsystems.javaschool.onlinestore.service.user.UserService;
 @RequestMapping("/orders")
 public class OrderController {
 
+    /**
+     * Injected services
+     */
     private OrderService orderService;
-
-    @Autowired
     private UserService userService;
-
-    @Autowired
     private CartService cartService;
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, UserService userService, CartService cartService) {
         this.orderService = orderService;
+        this.userService=userService;
+        this.cartService=cartService;
     }
 
     /**
@@ -91,7 +92,6 @@ public class OrderController {
     @Secured("ROLE_USER")
     @RequestMapping(value = {"/addOrder",  "/addOrder/**"}, method = RequestMethod.POST)
     public String addOrderFromForm(@ModelAttribute("order") Order order, HttpSession session, Model model) {
-        System.out.println("Order id in method: "+ order.getId());
         long id_order=orderService.addOrder(order);
         Cart cart = cartService.getCart((Cart)session.getAttribute("cart"));
         cartService.removeOrderProducts(cart, order.getOrderDetailsList());
@@ -102,7 +102,6 @@ public class OrderController {
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showOrder(@PathVariable long id, Principal principal, Model model, HttpServletRequest request) {
-        System.out.println("In cont: "+request.isUserInRole("ROLE_EMPLOYEE"));
         Order order = orderService.selectOrder(id, principal.getName(), request.isUserInRole("ROLE_EMPLOYEE"));
             model.addAttribute("order", order);
             return "orders/view";
@@ -195,9 +194,6 @@ public class OrderController {
         return "orders/list";
     }
 
-
-
-
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
     public String deleteUserOrder(@PathVariable long id, Principal principal,  HttpServletRequest request) {
@@ -213,6 +209,5 @@ public class OrderController {
         }
         model.addAttribute("orderList", orderService.selectOrderList(request.getParameter("parameter")));
         return "orders/user";
-
     }
 }

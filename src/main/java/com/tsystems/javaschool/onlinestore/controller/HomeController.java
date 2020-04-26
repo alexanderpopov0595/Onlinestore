@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.onlinestore.controller;
 
+import com.tsystems.javaschool.onlinestore.service.message.MessageService;
 import com.tsystems.javaschool.onlinestore.service.sales.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,22 +8,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-
+/**
+ * Controller handles requests starting with "/"
+ */
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
+    /**
+     * Injected message and sales service
+     */
+    private MessageService messageService;
+
     private SalesService salesService;
 
     @Autowired
-    public HomeController(SalesService salesService) {
+    public HomeController(SalesService salesService, MessageService messageService) {
+
         this.salesService=salesService;
+        this.messageService=messageService;
     }
 
     /**
-     * Method returns home page
+     *  Method gets top-10 products and returns home page
+     * @param model
+     * @return home page
      */
     @RequestMapping(method = RequestMethod.GET)
     public String showHomePage(Model model) {
@@ -30,13 +40,4 @@ public class HomeController {
         return "home";
     }
 
-
-    /**
-     * Method returns 403 page
-     */
-    @RequestMapping(value="/403",method = RequestMethod.GET)
-    public String showAccesssDenied() {
-
-        return "errors/403";
-    }
 }

@@ -40,6 +40,7 @@ public class SalesDaoImpl implements SalesDao {
                 + "GROUP BY id_product "
                 + "ORDER BY count DESC) AS T2 "
                 + "	ON products.id=T2.id_product"
+                +" WHERE quantity>0"
                 +" ORDER BY T2.count DESC LIMIT 10").getResultList();
         List<Product> productList=new ArrayList<Product>();
         for(Object[] o: objList) {
@@ -56,7 +57,7 @@ public class SalesDaoImpl implements SalesDao {
     }
 
     public List<User> getTopUserList() {
-        List<Object[]> objList=entityManager.createNativeQuery("SELECT id, firstName, lastName, email, birthday, login, password FROM users JOIN ( SELECT id_user, COUNT(id_user) AS count FROM sales GROUP BY id_user ORDER BY count DESC) AS T2 ON users.id=T2.id_user ORDER BY T2.count DESC LIMIT 10").getResultList();
+        List<Object[]> objList=entityManager.createNativeQuery("SELECT id, firstName, lastName, email, birthday, login, password FROM users JOIN ( SELECT id_user, COUNT(id_user) AS count FROM sales GROUP BY id_user ORDER BY count DESC) AS T2 ON users.id=T2.id_user WHERE status='ACTIVE' ORDER BY T2.count DESC LIMIT 10").getResultList();
         List<User> userList=new ArrayList<User>();
         for(Object[] o:objList){
             User user=new User();

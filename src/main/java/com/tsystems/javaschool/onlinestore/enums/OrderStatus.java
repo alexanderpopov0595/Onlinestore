@@ -1,4 +1,5 @@
 package com.tsystems.javaschool.onlinestore.enums;
+
 import java.util.EnumSet;
 
 public enum OrderStatus {
@@ -9,21 +10,25 @@ public enum OrderStatus {
 
     private String code;
 
-    OrderStatus (String code) {
-        this.code=code;
+    OrderStatus(String code) {
+        this.code = code;
     }
+
     public String getCode() {
         return code;
     }
+
+    /**
+     * Methods return OrderStatus by code
+     * @param code
+     * @return OrderStatus
+     */
     static public OrderStatus getOrderStatus(String code) {
-        for(OrderStatus e:EnumSet.allOf(OrderStatus.class)) {
-            if(e.getCode().equals(code)) {
+        for (OrderStatus e : EnumSet.allOf(OrderStatus.class)) {
+            if (e.getCode().equals(code)) {
                 return e;
             }
         }
         return null;
     }
-
-
-
 }

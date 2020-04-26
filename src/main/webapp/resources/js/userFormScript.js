@@ -19,6 +19,7 @@ function addForm(e){
     //set new form template with indexes
     var form=
         '<input type="hidden" name="addressList['+i+'].id" value="0"/>'+
+        '<input type="hidden" name="addressList['+i+'].status" value="ACTIVE"/>'+
         '<div class="form-element">'+
         '<input class="form-button delete" type="button" value="&#8854 Delete address"  onclick="removeForm(this)">'+
         '</div>'+
@@ -78,13 +79,14 @@ function rewriteForms(forms){
         forms[i].setAttribute("id", i);
 
         //set indexes to every field
-        forms[i].getElementsByTagName("input")[0].setAttribute("name", "addressesList["+i+"].id");
-        forms[i].getElementsByTagName("input")[2].setAttribute("name", "addressList["+i+"].country");
-        forms[i].getElementsByTagName("input")[3].setAttribute("name", "addressList["+i+"].city");
-        forms[i].getElementsByTagName("input")[4].setAttribute("name", "addressList["+i+"].zipcode");
-        forms[i].getElementsByTagName("input")[5].setAttribute("name", "addressList["+i+"].street");
-        forms[i].getElementsByTagName("input")[6].setAttribute("name", "addressList["+i+"].building");
-        forms[i].getElementsByTagName("input")[7].setAttribute("name", "addressList["+i+"].apartment");
+        forms[i].getElementsByTagName("input")[0].setAttribute("name", "addressList["+i+"].id");
+        forms[i].getElementsByTagName("input")[1].setAttribute("name", "addressList["+i+"].status");
+        forms[i].getElementsByTagName("input")[3].setAttribute("name", "addressList["+i+"].country");
+        forms[i].getElementsByTagName("input")[4].setAttribute("name", "addressList["+i+"].city");
+        forms[i].getElementsByTagName("input")[5].setAttribute("name", "addressList["+i+"].zipcode");
+        forms[i].getElementsByTagName("input")[6].setAttribute("name", "addressList["+i+"].street");
+        forms[i].getElementsByTagName("input")[7].setAttribute("name", "addressList["+i+"].building");
+        forms[i].getElementsByTagName("input")[8].setAttribute("name", "addressList["+i+"].apartment");
 
     }
 

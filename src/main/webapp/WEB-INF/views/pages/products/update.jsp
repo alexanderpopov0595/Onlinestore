@@ -1,13 +1,17 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="grid-form">
-<form:form method="POST" class="form" modelAttribute="product" onsubmit="clearEmptyForms()"  >
+<form:form method="POST" class="form" modelAttribute="product" onsubmit="clearEmptyForms()" enctype="multipart/form-data"  >
     <div class="form-header">
         <h3>Update product</h3>
     </div>
         <input type="hidden" name="id" value="${product.id}"/>
         <div class="form-element">
-            <img src="${path}/images/products/${product.id}.jpg" width="300" border="0" align="center"	onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
+            <img src="<c:url value="/images/products/${product.id}.jpg"/>" width="300" border="0" align="center"	onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
+        </div>
+        <div class="form-group">
+            <label>Upload image</label>
+            <input name="image" class="form-input" type="file"/>
         </div>
         <div class="form-element">
             <label>Product name:</label>
@@ -30,14 +34,17 @@
             <input type="text" name="quantity" value="${product.quantity}" class="form-input" required />
         </div>
         <div class="form-element">
-            <label style="font-weight: bold">Choose category: </label>
-            <input type="text" value="${product.category.name}" name="category.name"  list="categoryList" class="form-input" oninput="addForm(this)"/>
+            <select id="categoryList" class="form-input" name="category.id"  oninput="addForm(this)" >
+                <c:forEach var="category"  items="${categoryList}" varStatus="i">
+                    <c:if test="${category.id==product.category.id}">
+                        <option selected id="${category.id}" value="${category.id}">${category.name}</option>
+                    </c:if>
+                    <c:if test="${category.id!=product.category.id}">
+                        <option  id="${category.id}" value="${category.id}">${category.name}</option>
+                    </c:if>
+                </c:forEach>
+            </select>
         </div>
-        <datalist id="categoryList">
-            <c:forEach var="category" items="${categoryList}" varStatus="i">
-                <option id="${category.id}" value="${category.name}"/>
-            </c:forEach>
-        </datalist>
         <c:forEach var="category" items="${categoryList}" varStatus="i">
             <div id="category-${category.id}" class="dynamic" style ="display:none">
                 <input type="hidden" name="category.id" value="${category.id}"/>
@@ -46,7 +53,7 @@
                         <div class="form-element">
                             <label><c:out value="${parameter.name}:"/></label>
                             <input type="hidden" class="form-input"  name="productDetailsList[${j.index}].parameter.id" value="${parameter.id}" />
-                            <input type="text"  class="form-input" name="productDetailsList[${j.index}].value" />
+                            <input type="text"  class="form-input" name="productDetailsList[${j.index}].value"/>
                         </div>
                     </div>
                 </c:forEach>

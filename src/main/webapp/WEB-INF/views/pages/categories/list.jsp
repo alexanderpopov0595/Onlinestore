@@ -42,9 +42,9 @@
     <div class="content">
         <div class="gallery">
             <c:forEach var="category" items="${categoryList}" varStatus="i">
-                <div>
+                <div style="text-align: center">
                     <a style="text-decoration: none; color:black" href="<c:url value="/products/categories/${category.name}"/>">
-                        <img src="${path}/images/categories/${category.name}.jpg" width="300"
+                        <img  src="<c:url value="/images/categories/${category.id}.jpg"/>" width="300"
                              border="0" align="middle"
                              onError="this.src='<c:url value="/resources/img"/>/category.jpg';" />
                         <br/>
@@ -56,5 +56,4 @@
         </div>
     </div>
 </div>
-
 

@@ -11,7 +11,7 @@ public interface UserService {
      * Method adds user to database
      * @param user
      */
-    public void addUser(User user);
+    public long addUser(User user);
 
     /**
      * Method updates user in database

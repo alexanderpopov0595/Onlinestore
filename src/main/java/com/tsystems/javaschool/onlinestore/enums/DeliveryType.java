@@ -9,22 +9,25 @@ public enum DeliveryType {
 
     private String code;
 
-
     DeliveryType(String code) {
-        this.code=code;
+        this.code = code;
     }
-    public String getCode(){
+
+    public String getCode() {
         return code;
     }
 
+    /**
+     * Method returns DeliveryType by code
+     * @param code
+     * @return DeliveryType
+     */
     static public DeliveryType getDeliveryType(String code) {
-        for(DeliveryType e:EnumSet.allOf(DeliveryType.class)) {
-            if(e.getCode().equals(code)) {
+        for (DeliveryType e : EnumSet.allOf(DeliveryType.class)) {
+            if (e.getCode().equals(code)) {
                 return e;
             }
         }
         return null;
     }
-
-
 }

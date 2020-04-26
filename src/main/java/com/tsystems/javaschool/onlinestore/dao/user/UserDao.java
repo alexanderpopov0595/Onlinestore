@@ -1,6 +1,8 @@
 package com.tsystems.javaschool.onlinestore.dao.user;
 
+import com.tsystems.javaschool.onlinestore.domain.user.Address;
 import com.tsystems.javaschool.onlinestore.domain.user.User;
+import java.util.List;
 
 /**
  * Interface provides methods to work with user in database
@@ -8,7 +10,7 @@ import com.tsystems.javaschool.onlinestore.domain.user.User;
 public interface UserDao {
 
     /**
-     *  Method adds user to database     *
+     * Method adds user to database     *
      * @param user
      */
     public void addUser(User user);
@@ -22,26 +24,34 @@ public interface UserDao {
     /**
      * Method returns user by id
      * @param id
-     * @return
+     * @return user
      */
     public User selectUser(long id);
 
     /**
-     * Method returns user by login
+     * Method returns user by login with active status
      * @param login
-     * @return
+     * @return user
      */
     public User selectUser(String login);
 
     /**
-     * Method deletes user and addresse by user id
+     * Method returns addresses with active status by user id
+     * @param id
+     * @return address list
+     */
+    public List<Address> selectAddressList(long id);
+
+    /**
+     * Method changes user status to DELETED by user id
      * @param id
      */
     public void deleteUser(long id);
 
-
-
-
-
+    /**
+     * Method changes addresses status to DELETED by user id
+     * @param id
+     */
+    public void deleteAddresses(long id);
 
 }

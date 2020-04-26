@@ -1,10 +1,14 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="grid-form">
-<form:form method="POST" class="form" modelAttribute="product"  onsubmit="clearEmptyForms()" >
+<form:form method="POST" class="form" modelAttribute="product"  onsubmit="checkSelected();clearEmptyForms()" enctype="multipart/form-data" >
     <div class="form-header">
         <h3>Add product</h3>
     </div>
+        <div class="form-group">
+            <label>Upload image</label>
+            <input name="image" class="form-input" type="file"/>
+        </div>
         <div class="form-group">
             <label>Product name:</label>
             <input type="text" name="name" class="form-input" required />
@@ -26,14 +30,13 @@
             <input type="text" name="quantity" class="form-input" required />
         </div>
         <div class="form-element">
-            <label style="font-weight: bold">Choose category: </label>
-            <input type="text" name="category.name" list="categoryList" class="form-input" oninput="addForm(this)"/>
+            <select id="categoryList" class="form-input" name="category.id" oninput="addForm(this)" >
+                <option selected disabled>Choose category</option>
+                <c:forEach var="category"  items="${categoryList}" varStatus="i">
+                    <option id="${category.id}" value="${category.id}">${category.name}</option>
+                </c:forEach>
+            </select>
         </div>
-        <datalist id="categoryList">
-            <c:forEach var="category"  items="${categoryList}" varStatus="i">
-                <option id="${category.id}" value="${category.name}"/>
-            </c:forEach>
-        </datalist>
         <c:forEach var="category" items="${categoryList}" varStatus="i">
             <div id="category-${category.id}" class="dynamic" style ="display:none">
                 <input type="hidden" name="category.id" value="${category.id}"/>

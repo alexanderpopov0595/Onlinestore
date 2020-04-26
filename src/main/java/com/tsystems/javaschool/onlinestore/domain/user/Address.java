@@ -1,14 +1,10 @@
 package com.tsystems.javaschool.onlinestore.domain.user;
 
+import com.tsystems.javaschool.onlinestore.enums.Status;
+
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.Objects;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -43,6 +39,12 @@ public class Address implements Serializable {
 
     @Column(name = "apartment")
     private int apartment;
+
+
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     public void setId(long id) {
         this.id = id;
@@ -122,6 +124,13 @@ public class Address implements Serializable {
         this.apartment = apartment;
     }
 
+    public void setStatus(String status){
+        this.status=Status.valueOf(status);
+    }
+    public Status getStatus(){
+        return status;
+    }
+
     @Override
     public String toString() {
         return "Address{" +
@@ -132,5 +141,17 @@ public class Address implements Serializable {
                 ", building=" + building +
                 ", apartment=" + apartment +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return id == address.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

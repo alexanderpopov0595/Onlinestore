@@ -1,18 +1,19 @@
 package com.tsystems.javaschool.onlinestore.controller;
 
-import com.tsystems.javaschool.onlinestore.domain.user.Address;
 import com.tsystems.javaschool.onlinestore.domain.user.User;
+import com.tsystems.javaschool.onlinestore.service.image.ImageService;
 import com.tsystems.javaschool.onlinestore.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -23,13 +24,16 @@ import java.security.Principal;
 public class UserController {
 
     /**
-     * Injected user service
+     * Injected services
      */
     private UserService userService;
 
+    private ImageService imageService;
+
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, ImageService imageService){
         this.userService=userService;
+        this.imageService=imageService;
     }
 
     /**
@@ -66,14 +70,15 @@ public class UserController {
      * @throws ServletException
      */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String addUserFromForm(@Valid User user, BindingResult result, Model model, HttpServletRequest request) throws ServletException {
+    public String addUserFromForm(@Valid User user, BindingResult result, Model model, HttpServletRequest request,  @RequestParam(value = "image", required = false) MultipartFile image) throws ServletException {
         if (result.hasErrors()) {
             return "users/signup";
         }
-        userService.addUser(user);
+        long id=userService.addUser(user);
         if (user.getRole().equals("ROLE_USER")) {
             request.login(user.getLogin(), user.getPassword());
         }
+        imageService.uploadImage(image, "users", id);
         return "redirect:/users/account";
     }
 
@@ -115,21 +120,22 @@ public class UserController {
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
     @RequestMapping(value = "/account/update", method = RequestMethod.POST)
     public String updateUserFromForm(@Valid User user, BindingResult result, Model model, Principal principal,
-                                     HttpServletRequest request) throws ServletException {
+                                     HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image) throws ServletException {
         if(result.hasErrors()){
             return "users/update";
         }
            try {
                userService.updateUser(user);
-           }
-           catch (Exception ex){
-               model.addAttribute("errors", "Login is existing");
-               return "users/update";
-           }
+          }
+          catch (Exception ex){
+             model.addAttribute("error", "Login is existing");
+             return "users/update";
+         }
 
         if (!principal.getName().equals(user.getLogin())) {
             new SecurityContextLogoutHandler().logout(request, null, null);
         }
+        imageService.uploadImage(image, "users", user.getId());
         return "redirect:/users/account";
     }
 

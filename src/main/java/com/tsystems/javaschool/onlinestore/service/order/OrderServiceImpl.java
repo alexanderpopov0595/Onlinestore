@@ -1,48 +1,50 @@
 package com.tsystems.javaschool.onlinestore.service.order;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.tsystems.javaschool.onlinestore.dao.product.ProductDao;
 import com.tsystems.javaschool.onlinestore.exceptions.AccessDeniedException;
-import org.apache.log4j.Logger;
+import com.tsystems.javaschool.onlinestore.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tsystems.javaschool.onlinestore.controller.CartController;
 import com.tsystems.javaschool.onlinestore.dao.deposit.DepositDao;
 import com.tsystems.javaschool.onlinestore.dao.order.OrderDao;
-import com.tsystems.javaschool.onlinestore.dao.sales.SalesDao;
 import com.tsystems.javaschool.onlinestore.domain.order.Order;
 import com.tsystems.javaschool.onlinestore.domain.order.OrderDetails;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
 import com.tsystems.javaschool.onlinestore.domain.user.Deposit;
-import com.tsystems.javaschool.onlinestore.domain.user.User;
 import com.tsystems.javaschool.onlinestore.enums.OrderStatus;
 import com.tsystems.javaschool.onlinestore.enums.PaymentStatus;
 import com.tsystems.javaschool.onlinestore.enums.PaymentType;
 import com.tsystems.javaschool.onlinestore.exceptions.OutOfBalanceException;
 import com.tsystems.javaschool.onlinestore.exceptions.OutOfQuantityException;
-import com.tsystems.javaschool.onlinestore.service.deposit.DepositService;
 import com.tsystems.javaschool.onlinestore.service.sales.SalesService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
     private OrderDao orderDao;
 
-    @Autowired
     private SalesService salesService;
 
-    @Autowired
+    private MessageService messageService;
+
     private ProductDao productDao;
 
-    @Autowired
     private DepositDao depositDao;
+
+    @Autowired
+    public OrderServiceImpl(OrderDao orderDao, SalesService salesService, MessageService messageService, ProductDao productDao, DepositDao depositDao){
+        this.orderDao=orderDao;
+        this.salesService=salesService;
+        this.messageService=messageService;
+        this.productDao=productDao;
+        this.depositDao=depositDao;
+    }
 
     /**
      * Method compares the actual quantity of products in the database with the
@@ -138,7 +140,6 @@ public class OrderServiceImpl implements OrderService {
        for(OrderDetails od: order.getOrderDetailsList()){
             od.setOrder(order);
         }
-        System.out.println("Order id: "+ order.getId());
         if (order.getPaymentType() == PaymentType.ONLINE) {
             payOrder(order);
         }
@@ -147,6 +148,7 @@ public class OrderServiceImpl implements OrderService {
             addOrderToSales(order);
         }
        decreaseOrderProductsQuantity(order.getOrderDetailsList());
+        messageService.sendMessage();
         return order.getId();
     }
 
@@ -277,6 +279,7 @@ public class OrderServiceImpl implements OrderService {
             orderDao.deleteOrderDetails(od.getId());
         }
         orderDao.deleteOrder(order.getId());
+        messageService.sendMessage();
 
     }
 }

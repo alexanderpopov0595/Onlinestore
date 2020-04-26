@@ -3,40 +3,46 @@ package com.tsystems.javaschool.onlinestore.service.category;
 import java.util.List;
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
 
-/*
- * interface provides methods to work with categories
+/**
+ * Interface provides methods to work with categories
  */
 public interface CategoryService {
 
-    /*
-     * method adds new category
+    /**
+     * Method adds new category
+     * @param category
+     * @return
      */
-    public void addCategory(Category category);
+    public long addCategory(Category category);
 
-    /*
-     * Method updates category
+    /**
+     *  Method updates category
+     * @param category
      */
     public void updateCategory(Category category);
 
-    /*
-     * methods returns category by id
+    /**
+     * Methods returns category by id
+     * @param id
+     * @return
      */
     public Category selectCategory(long id);
 
-
-
-    /*
-     * method returns category list
+    /**
+     * Method returns category list
+     * @return
      */
     public List<Category> selectCategoryList();
 
-    /*
-     * method returns category list with parameters
+    /**
+     * Method returns category list with parameters
+     * @return
      */
     public List<Category> selectCategoryListWithParameters();
 
-    /*
-     * method deletes category
+    /**
+     * Method deletes category
+     * @param category
      */
     public void deleteCategory(Category category);
 

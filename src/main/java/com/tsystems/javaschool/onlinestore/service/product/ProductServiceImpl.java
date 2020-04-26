@@ -12,9 +12,21 @@ import com.tsystems.javaschool.onlinestore.domain.product.ProductDetails;
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
+    /**
+     * Injected productDao
+     */
     private ProductDao productDao;
 
+    @Autowired
+    public ProductServiceImpl(ProductDao productDao){
+        this.productDao=productDao;
+    }
+
+    /**
+     * Method sets product details for every product and add product to database
+     * @param product
+     * @return create product id
+     */
     public long addProduct(Product product) {
         for (ProductDetails pd : product.getProductDetailsList()) {
             pd.setProduct(product);
@@ -23,6 +35,12 @@ public class ProductServiceImpl implements ProductService {
         return product.getId();
     }
 
+    /**
+     * Method loads original product and compare original product category with updated product category
+     * If category was changed - method deletes all product details
+     * Then method sets all product details to product and add product to database
+     * @param product
+     */
     public void updateProduct(Product product) {
         Product original = productDao.selectProduct(product.getId());
         if (original.getCategory().getId() != product.getCategory().getId()) {
@@ -34,9 +52,13 @@ public class ProductServiceImpl implements ProductService {
             pd.setProduct(product);
         }
         productDao.updateProduct(product);
-
     }
 
+    /**
+     * Method loads product by id and loads product details and category paramters names
+     * @param id
+     * @return product
+     */
     public Product selectProduct(long id) {
         Product product = productDao.selectProduct(id);
         for (ProductDetails pd : product.getProductDetailsList()) {
@@ -45,6 +67,7 @@ public class ProductServiceImpl implements ProductService {
         product.getCategory().getParameterList().size();
         return product;
     }
+
 
     public List<Product> selectProductListByCategory(String category) {
         return productDao.selectProductListByCategory(category);
@@ -55,8 +78,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void deleteProduct(long id) {
-        productDao.deleteProductDetails(id);
         productDao.deleteProduct(id);
     }
-
 }

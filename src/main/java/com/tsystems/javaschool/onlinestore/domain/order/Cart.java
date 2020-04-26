@@ -2,7 +2,6 @@ package com.tsystems.javaschool.onlinestore.domain.order;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.sun.istack.internal.logging.Logger;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
 
@@ -11,11 +10,13 @@ import com.tsystems.javaschool.onlinestore.domain.product.Product;
  */
 public class Cart {
 
+    /**
+     * Map contains products and their quantities
+     */
     private Map<Product, Integer> productMap;
-    private final static Logger  logger= Logger.getLogger(Cart.class);
 
     public Cart(){
-        productMap=new HashMap<Product,Integer>();
+        productMap=new HashMap<>();
     }
 
     /**
@@ -25,10 +26,7 @@ public class Cart {
      * @param product
      */
     public void addProduct(Product product){
-        logger.info("Add product[id="+product.getId()+"]");
         Integer count=productMap.get(product);
-
-        logger.info("Count="+count);
         productMap.put(product, count==null? 1:count+1);
     }
 
@@ -85,10 +83,4 @@ public class Cart {
    public Map<Product, Integer> getProductMap(){
        return productMap;
    }
-
-
-
-
-
-
 }

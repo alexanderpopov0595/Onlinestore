@@ -66,8 +66,6 @@ public interface OrderService {
      */
     public List<Order> selectOrderListByOrderStatus(String login, String OrderStatusCode);
 
-
-
     /**
      * Method deletes order by id
      * @param id

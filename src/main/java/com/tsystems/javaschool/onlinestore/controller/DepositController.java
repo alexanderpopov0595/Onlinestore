@@ -53,7 +53,7 @@ public class DepositController {
 
     @Secured("ROLE_USER")
     @RequestMapping(value = "/addDeposit", method = RequestMethod.POST)
-    public String addDepositFromForm(@Valid Deposit deposit, Principal principal, BindingResult result) {
+    public String addDepositFromForm(@Valid Deposit deposit, BindingResult result, Principal principal) {
         if(result.hasErrors()){
             return "deposits/form";
         }

@@ -1,12 +1,17 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="grid-form">
-    <form:form class="form" method="POST" modelAttribute="category">
+    <form:form class="form" method="POST" modelAttribute="category" enctype="multipart/form-data">
         <div class="form-header">
             <h3>Add category</h3>
         </div>
+        <input type="hidden" name="status" value="ACTIVE"/>
         <div class="form-element">
             <c:out value="${error}" />
+        </div>
+        <div class="form-element">
+            <label>Upload image</label>
+            <input name="image" class="form-input" type="file"/>
         </div>
         <div class="form-element">
             <form:input type="text" path="name"   class="form-input" placeholder="Category name" required="true" />

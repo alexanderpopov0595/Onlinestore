@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.onlinestore.controller;
 
 import com.tsystems.javaschool.onlinestore.service.sales.SalesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ public class SalesController {
      */
     private SalesService salesService;
 
+    @Autowired
     public SalesController(SalesService salesService){
         this.salesService=salesService;
     }
@@ -26,7 +28,7 @@ public class SalesController {
     /**
      * Method loads most popular products and puts them to model
      * @param model
-     * @return
+     * @return products top page
      */
     @RequestMapping(value="/productsTop", method= RequestMethod.GET)
     public String showTopProducts(Model model){
@@ -37,7 +39,7 @@ public class SalesController {
     /**
      * Method loads most active users and puts them to model
      * @param model
-     * @return
+     * @return users top page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value="/usersTop", method = RequestMethod.GET)
@@ -49,7 +51,7 @@ public class SalesController {
     /**
      * Method loads week sales and put them in model
      * @param model
-     * @return
+     * @return week sales page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value="/weekSales", method = RequestMethod.GET)
@@ -61,7 +63,7 @@ public class SalesController {
     /**
      * Method loads month sales and put them in model
      * @param model
-     * @return
+     * @return month sales page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value="/monthSales", method = RequestMethod.GET)

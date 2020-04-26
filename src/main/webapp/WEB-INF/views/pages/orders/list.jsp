@@ -73,6 +73,9 @@
                 <th>Payment status</th>
                 <th>Payment type</th>
                 <th>Delivery type</th>
+                <sec:authorize access="hasRole('EMPLOYEE')">
+                    <th>User</th>
+                </sec:authorize>
             </tr>
             <c:forEach var="order" items="${orderList}" varStatus="i">
                 <tr>
@@ -96,6 +99,13 @@
                     <td>
                             ${order.deliveryType.code}
                     </td>
+                    <sec:authorize access="hasRole('EMPLOYEE')">
+                        <td>
+                            <a href="<c:url value="/orders/user/${order.user.id}"/>">
+                                ${order.user.firstName} ${order.user.lastName}
+                            </a>
+                        </td>
+                    </sec:authorize>
                 </tr>
             </c:forEach>
         </table>

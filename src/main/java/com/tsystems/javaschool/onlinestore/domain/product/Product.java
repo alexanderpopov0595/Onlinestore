@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
 
 import java.util.ArrayList;
@@ -37,8 +39,10 @@ public class Product implements Serializable {
     private long price;
 
     @Transient
+    @JsonIgnore
     private long minPrice;
     @Transient
+    @JsonIgnore
     private long maxPrice;
 
     @Column(name = "weight")
@@ -52,9 +56,11 @@ public class Product implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_category", referencedColumnName = "id")
+    @JsonIgnore
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<ProductDetails> productDetailsList;
 
     public Product() {

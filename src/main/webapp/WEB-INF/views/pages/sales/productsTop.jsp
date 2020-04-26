@@ -38,7 +38,7 @@
             <c:forEach var="product" items="${topProductsList}" varStatus="i">
                 <div>
                     <a style="text-decoration: none; color:black" href="<c:url value="/products/${product.id}"/>">
-                        <img src="${path}/images/products/${product.id}.jpg" width="300"
+                        <img src="/images/products/${product.id}.jpg" width="300"
                              border="0" align="middle"
                              onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
                         <br/>

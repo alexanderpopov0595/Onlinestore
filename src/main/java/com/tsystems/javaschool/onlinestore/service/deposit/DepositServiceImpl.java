@@ -10,21 +10,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 
 @Service
 @Transactional
 public class DepositServiceImpl implements DepositService {
 
-    @Autowired
+    /**
+     * Injected deposit dao and user dao
+     */
     private DepositDao depositDao;
 
-    @Autowired
     private UserDao userDao;
 
+    @Autowired
+    public DepositServiceImpl(DepositDao depositDao, UserDao userDao){
+        this.depositDao=depositDao;
+        this.userDao=userDao;
+    }
+
     /**
-     * Method gets user by user login, sets user to deposit and adds deligates deposit to depositDao add method
+     * Method adds deposit to database
+     * If deposit is already existing - throws exception
+     * @param deposit with information about deposit number and password
+     * @param login of owner
      */
     @Override
     public void addDeposit(Deposit deposit, String login) {
@@ -38,9 +47,6 @@ public class DepositServiceImpl implements DepositService {
         }
     }
 
-    /**
-     * Method deligates deposit to depositDao update method
-     */
     @Override
     public void updateDeposit(Deposit deposit) {
         depositDao.updateDeposit(deposit);
@@ -48,7 +54,10 @@ public class DepositServiceImpl implements DepositService {
     }
 
     /**
-     * Method gets user by use login, gets user id and deligates to depositDao select method
+     * Method selects deposit by user's login
+     * If deposit is not found - throws exception
+     * @param login
+     * @return deposit
      */
     @Override
     public Deposit selectDeposit(String login) {
@@ -63,7 +72,8 @@ public class DepositServiceImpl implements DepositService {
     }
 
     /**
-     * Method gets deposit balance before update, sums it to added balance value and deligates to depositDao update balance method
+     * Method gets deposit balance before update, sums it to added balance value and updates deposit balance
+     * @param deposit
      */
     @Override
     public void updateDepositBalance(Deposit deposit) {
@@ -73,15 +83,8 @@ public class DepositServiceImpl implements DepositService {
 
     }
 
-    /**
-     * Method deligates to depositDao delete method
-     */
     @Override
     public void deleteDeposit(Deposit deposit) {
         depositDao.deleteDeposit(deposit.getId());
-
     }
-
-
-
 }

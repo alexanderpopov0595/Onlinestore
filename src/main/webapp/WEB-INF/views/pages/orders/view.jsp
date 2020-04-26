@@ -36,32 +36,26 @@
                     <td>${order.user.firstName}</td>
                 </tr>
                 <tr>
-
                     <td>Last name</td>
                     <td>${order.user.lastName}</td>
                 </tr>
                 <tr>
-
                     <td>Address</td>
                     <td>${order.address.country}, ${order.address.city}, ${order.address.zipcode}, ${order.address.street}, ${order.address.building}, ${order.address.apartment}</td>
                 </tr>
                 <tr>
-
                     <td>Delivery type</td>
                     <td>${order.deliveryType.code}</td>
                 </tr>
                 <tr>
-
                     <td>Payment type</td>
                     <td>${order.paymentType.code}</td>
                 </tr>
                 <tr>
-
                     <td>Order status</td>
                     <td>${order.orderStatus.code}</td>
                 </tr>
                 <tr>
-
                     <td>Payment status</td>
                     <td>${order.paymentStatus.code}</td>
                 </tr>
@@ -80,7 +74,7 @@
                     <tr>
                         <td>${i.index+1}</td>
                         <td>
-                            <img src="${path}/images/products/${orderDetails.product.id}.jpg" width="100"  onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
+                            <img src="<c:url value="/images/products/${orderDetails.product.id}.jpg"/>" width="100"  onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
                         </td>
                         <td>
                             <a href="<c:url value="/products/${orderDetails.product.id}"/>">
@@ -102,27 +96,3 @@
 <script>
     document.getElementById("defaultOpen").click();
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,17 +2,14 @@ package com.tsystems.javaschool.onlinestore.controller;
 
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
 import com.tsystems.javaschool.onlinestore.service.category.CategoryService;
+import com.tsystems.javaschool.onlinestore.service.image.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.naming.Binding;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 
 /**
@@ -23,13 +20,16 @@ import javax.validation.Valid;
 public class CategoryController {
 
     /**
-     * Injected service to work with categories
+     * Injected category and image service
      */
     private CategoryService categoryService;
 
+    private ImageService imageService;
+
     @Autowired
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, ImageService imageService) {
         this.categoryService = categoryService;
+        this.imageService=imageService;
     }
 
     /**
@@ -61,25 +61,24 @@ public class CategoryController {
      * @param category
      * @param model
      * @param result
+     * @param image
      * @return categories page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
-    public String addCategoryFromForm(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model) {
-        System.out.println("Inside");
+    public String addCategoryFromForm(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model,  @RequestParam(value = "image", required = false) MultipartFile image) {
         if(result.hasErrors()){
-            System.out.println("errors");
             return "categories/form";
         }
-        categoryService.addCategory(category);
+        long id=categoryService.addCategory(category);
+        imageService.uploadImage(image, "categories", id);
         return "redirect:/categories";
     }
-
     /**
      * Method loads category from database by id and returns update form
      * @param id
      * @param model
-     * @return
+     * @return category update page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value = "/{id}/update", method = RequestMethod.GET)
@@ -93,11 +92,11 @@ public class CategoryController {
      * If category is invalid - method returns update form
      * @param category
      * @param result
-     * @return
+     * @return category page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
-    public String updateCategoryFromForm(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model) {
+    public String updateCategoryFromForm(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model,   @RequestParam(value = "image", required = false) MultipartFile image) {
         if(result.hasErrors()){
             return "categories/update";
         }
@@ -108,19 +107,18 @@ public class CategoryController {
             model.addAttribute("errors", "Category name is already existing");
             return "categories/update";
         }
+        imageService.uploadImage(image, "categories", category.getId());
         return "redirect:/categories";
     }
-
     /**
      * Method deletes category
      * @param category
-     * @return
+     * @return categories page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
     public String deleteCategory(@ModelAttribute("category") Category category) {
         categoryService.deleteCategory(category);
         return "redirect:/categories";
     }
-
 }

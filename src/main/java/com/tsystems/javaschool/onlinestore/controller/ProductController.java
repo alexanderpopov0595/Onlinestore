@@ -1,17 +1,16 @@
 package com.tsystems.javaschool.onlinestore.controller;
 
+import com.tsystems.javaschool.onlinestore.service.image.ImageService;
+import com.tsystems.javaschool.onlinestore.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
 import com.tsystems.javaschool.onlinestore.service.category.CategoryService;
 import com.tsystems.javaschool.onlinestore.service.product.ProductService;
-
+import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -20,23 +19,27 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-    @Autowired
-    private CategoryService categoryService;
 
     /**
-     * Injected service to work with products
+     * Injected services
      */
+    private ImageService imageService;
+    private CategoryService categoryService;
     private ProductService productService;
+    private MessageService messageService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ImageService imageService, MessageService messageService, CategoryService categoryService) {
         this.productService = productService;
+        this.imageService=imageService;
+        this.messageService=messageService;
+        this.categoryService=categoryService;
     }
 
     /**
      * Method loads categories with parameters and put them and product in model
      * @param model
-     * @return
+     * @return form page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value = "/addProduct", method = RequestMethod.GET)
@@ -49,12 +52,14 @@ public class ProductController {
     /**
      * Method gets product from form and adds it to database
      * @param product
+     * @param image
      * @return redirect to product page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-    public String addProductFromForm(@ModelAttribute("product") Product product) {
-        long id = productService.addProduct(product);
+    public String addProductFromForm(@ModelAttribute("product") Product product, @RequestParam(value = "image", required = false) MultipartFile image) {
+       long id = productService.addProduct(product);
+        imageService.uploadImage(image, "products", id);
         return "redirect:/products/"+ id;
     }
 
@@ -87,24 +92,28 @@ public class ProductController {
     /**
      * Method gets product from update page and updates product in database
      * @param product
-     * @return
+     * @param image
+     * @return product page
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
-    public String updateProductFromForm(@ModelAttribute("product") Product product) {
+    public String updateProductFromForm(@ModelAttribute("product") Product product, @RequestParam(value = "image", required = false) MultipartFile image) {
         productService.updateProduct(product);
+        imageService.uploadImage(image, "products", product.getId());
+        messageService.sendMessage();
         return "redirect:/products/" +product.getId();
     }
 
     /**
      * Method deletes product by id
      * @param id
-     * @return
+     * @return categories page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
     public String deleteProduct(@PathVariable long id) {
         productService.deleteProduct(id);
+        messageService.sendMessage();
         return "redirect:/categories";
     }
 
@@ -132,7 +141,7 @@ public class ProductController {
     /**
      * Method loads all categories with parameters and returns form for custom product search
      * @param model
-     * @return
+     * @return search page
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String showCustomProductSearchForm(Model model) {
@@ -145,12 +154,14 @@ public class ProductController {
      * Method gets product parameters from custom search and shows found products
      * @param product
      * @param model
-     * @return
+     * @return products page
      */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchProductFromForm(@ModelAttribute("product") Product product, Model model) {
         model.addAttribute("productList", productService.searchProducts(product));
         return "products/list";
     }
+
+
 
 }

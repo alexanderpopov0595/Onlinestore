@@ -36,11 +36,13 @@
             <button class="tablinks" onclick="openTab(event, 'Product details')">Product details</button>
         </div>
         <div class="tabcontent" id="Product">
-            <table style="width:100%">
+            <table style="width:80%">
                 <tr>
-                    <td rowspan="7" style="border:none">
-                        <img src="${path}/images/products/${product.id}.jpg"  onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
+                    <td colspan="6" style="border:none">
+                        <img width= "300px" src="<c:url value="/images/products/${product.id}.jpg"/>"  onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
                     </td>
+                </tr>
+                <tr>
                     <td>Category</td>
                     <td>${product.category.name}</td>
                 </tr>
@@ -94,18 +96,3 @@
 <script>
     document.getElementById("defaultOpen").click();
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
