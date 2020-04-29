@@ -42,7 +42,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     public List<Category> selectCategoryList() {
-        return (List<Category>) entityManager.createQuery("SELECT c FROM Category c WHERE c.status=:status")
+        return  entityManager.createQuery("SELECT c FROM Category c WHERE c.status=:status")
                 .setParameter("status", Status.ACTIVE)
                 .getResultList();
     }

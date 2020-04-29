@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
 
-    private final static Logger logger=Logger.getLogger(CustomControllerAdvice.class);
+    private static final Logger logger=Logger.getLogger(CustomControllerAdvice.class);
 
     /**
      * Method handles exception when trying to add/update user with already existing login in database

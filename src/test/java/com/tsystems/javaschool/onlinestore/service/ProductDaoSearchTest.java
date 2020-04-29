@@ -26,28 +26,27 @@ public class ProductDaoSearchTest {
 
     @Test
     public void shouldReturnDefaultSQL() {
-        assertEquals(productDao.prepareSql(new Product()), "SELECT * FROM products  WHERE quantity>0 ");
+        assertEquals( "SELECT * FROM products  WHERE quantity>0 ", productDao.prepareSql(new Product()));
     }
 
     @Test
     public void shouldReturnSQLWithName() {
 
         product.setName("product_name");
-        assertEquals(productDao.prepareSql(product), "SELECT * FROM products  WHERE quantity>0  AND name LIKE '%product_name%'");
+        assertEquals("SELECT * FROM products  WHERE quantity>0  AND name LIKE '%product_name%'",productDao.prepareSql(product));
     }
 
     @Test
     public void shouldReturnSQLWithMinPrice() {
-
         product.setMinPrice(200);
-        assertEquals(productDao.prepareSql(product), "SELECT * FROM products  WHERE quantity>0  price > 200");
+        assertEquals("SELECT * FROM products  WHERE quantity>0  AND price > 200", productDao.prepareSql(product));
     }
 
     @Test
     public void shouldReturnSQLWithMaxPrice() {
 
         product.setMaxPrice(200);
-        assertEquals(productDao.prepareSql(product), "SELECT * FROM products  WHERE quantity>0  price < 200");
+        assertEquals("SELECT * FROM products  WHERE quantity>0  AND price < 200",productDao.prepareSql(product));
     }
 
     @Test
@@ -55,7 +54,7 @@ public class ProductDaoSearchTest {
 
         product.setMinPrice(200);
         product.setMaxPrice(300);
-        assertEquals(productDao.prepareSql(product), "SELECT * FROM products  WHERE quantity>0  price BETWEEN 200 AND 300 ");
+        assertEquals("SELECT * FROM products  WHERE quantity>0  AND price BETWEEN 200 AND 300 ", productDao.prepareSql(product) );
     }
 
     @Test
@@ -63,7 +62,7 @@ public class ProductDaoSearchTest {
         Category category = new Category();
         category.setId(1);
         product.setCategory(category);
-        assertEquals(productDao.prepareSql(product), "SELECT * FROM products  WHERE quantity>0  id_category=1 ");
+        assertEquals("SELECT * FROM products  WHERE quantity>0  AND id_category=1 ",productDao.prepareSql(product));
     }
 
     @Test
@@ -81,7 +80,7 @@ public class ProductDaoSearchTest {
         productDetailsList.add(pd);
         product.setProductDetailsList(productDetailsList);
         product.setCategory(category);
-        assertEquals(productDao.prepareSql(product), "SELECT * FROM products  WHERE quantity>0  id_category=1  AND id IN (SELECT T1.id_product FROM ( SELECT id_product FROM product_details WHERE id_parameter=1 AND value='value') AS T1  )");
+        assertEquals("SELECT * FROM products  WHERE quantity>0  AND id_category=1  AND id IN (SELECT T1.id_product FROM ( SELECT id_product FROM product_details WHERE id_parameter=1 AND value='value') AS T1  )",productDao.prepareSql(product));
 
     }
 
@@ -107,7 +106,7 @@ public class ProductDaoSearchTest {
         productDetailsList.add(pd2);
         product.setProductDetailsList(productDetailsList);
         product.setCategory(category);
-        assertEquals(productDao.prepareSql(product), "SELECT * FROM products  WHERE quantity>0  id_category=1  AND id IN (SELECT T1.id_product FROM ( SELECT id_product FROM product_details WHERE id_parameter=1 AND value='value1') AS T1  JOIN (  SELECT id_product FROM product_details WHERE id_parameter=2 AND value='value2') AS T2 ON T1.id_product=T2.id_product  )");
+        assertEquals("SELECT * FROM products  WHERE quantity>0  AND id_category=1  AND id IN (SELECT T1.id_product FROM ( SELECT id_product FROM product_details WHERE id_parameter=1 AND value='value1') AS T1  JOIN (  SELECT id_product FROM product_details WHERE id_parameter=2 AND value='value2') AS T2 ON T1.id_product=T2.id_product  )",productDao.prepareSql(product));
 
     }
 
@@ -129,7 +128,7 @@ public class ProductDaoSearchTest {
         productDetailsList.add(pd1);
         product.setProductDetailsList(productDetailsList);
         product.setCategory(category);
-        assertEquals(productDao.prepareSql(product), "SELECT * FROM products  WHERE quantity>0  id_category=1  AND id IN (SELECT T1.id_product FROM ( SELECT id_product FROM product_details WHERE id_parameter=1 AND value='value1') AS T1  )");
+        assertEquals("SELECT * FROM products  WHERE quantity>0  AND id_category=1  AND id IN (SELECT T1.id_product FROM ( SELECT id_product FROM product_details WHERE id_parameter=1 AND value='value1') AS T1  )",productDao.prepareSql(product));
 
     }
 }

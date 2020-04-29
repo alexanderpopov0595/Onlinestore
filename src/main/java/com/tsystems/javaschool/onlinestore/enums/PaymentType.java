@@ -2,6 +2,9 @@ package com.tsystems.javaschool.onlinestore.enums;
 
 import java.util.EnumSet;
 
+/**
+ * Enum represents payment type for order
+ */
 public enum PaymentType {
 
     CASH("Cash payment upon receipt of order"),
@@ -16,7 +19,7 @@ public enum PaymentType {
     public String getCode() {
         return code;
     }
-    static public PaymentType getPaymentType(String code) {
+    public static PaymentType getPaymentType(String code) {
         for(PaymentType e:EnumSet.allOf(PaymentType.class)) {
             if(e.getCode().equals(code)) {
                 return e;

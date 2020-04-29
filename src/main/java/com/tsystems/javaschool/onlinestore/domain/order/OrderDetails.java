@@ -1,10 +1,7 @@
 package com.tsystems.javaschool.onlinestore.domain.order;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
-
+import java.util.Objects;
 import javax.persistence.*;
 
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
@@ -63,28 +60,17 @@ public class OrderDetails implements Serializable {
 
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDetails that = (OrderDetails) o;
+        return id == that.id;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        OrderDetails other = (OrderDetails) obj;
-        if (id != other.id)
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(id);
     }
-
-
 
     public String toString() {
         return "Order details product id: "+ product.getId();

@@ -33,7 +33,7 @@ public interface OrderDao {
 
     public List<Order> selectOrderList(String login);
 
-    public List<Order> selectOrderList(long id_user);
+    public List<Order> selectOrderList(long userID);
 
     /*
      * Method returns order list by order status

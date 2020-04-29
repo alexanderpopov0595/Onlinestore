@@ -6,7 +6,7 @@ import com.tsystems.javaschool.onlinestore.domain.user.User;
  * Exception throws when trying to add user with already existing account
  */
 public class LoginIsCurrentlyExisting extends RuntimeException {
-    private User user;
+    private final User user;
 
     public LoginIsCurrentlyExisting(User user){
         this.user=user;
@@ -15,6 +15,7 @@ public class LoginIsCurrentlyExisting extends RuntimeException {
      * Method returns error message
      * @return error message
      */
+    @Override
     public String getMessage(){
         return "Login is currently existing";
     }

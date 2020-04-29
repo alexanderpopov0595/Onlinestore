@@ -1,6 +1,5 @@
 package com.tsystems.javaschool.onlinestore.controller;
 
-import com.tsystems.javaschool.onlinestore.service.message.MessageService;
 import com.tsystems.javaschool.onlinestore.service.sales.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,17 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 
     /**
-     * Injected message and sales service
+     * Injected sales service
      */
-    private MessageService messageService;
-
     private SalesService salesService;
 
     @Autowired
-    public HomeController(SalesService salesService, MessageService messageService) {
-
+    public HomeController(SalesService salesService) {
         this.salesService=salesService;
-        this.messageService=messageService;
     }
 
     /**

@@ -1,12 +1,9 @@
 package com.tsystems.javaschool.onlinestore.domain.user;
 
 import com.tsystems.javaschool.onlinestore.enums.Status;
-
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "addresses")
@@ -39,8 +36,6 @@ public class Address implements Serializable {
 
     @Column(name = "apartment")
     private int apartment;
-
-
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

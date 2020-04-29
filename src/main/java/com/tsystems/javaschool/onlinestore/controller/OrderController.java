@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.tsystems.javaschool.onlinestore.dao.order.OrderDao;
 import com.tsystems.javaschool.onlinestore.domain.order.Cart;
 import com.tsystems.javaschool.onlinestore.domain.order.Order;
-import com.tsystems.javaschool.onlinestore.domain.order.OrderDetails;
-import com.tsystems.javaschool.onlinestore.domain.product.Product;
 import com.tsystems.javaschool.onlinestore.enums.DeliveryType;
 import com.tsystems.javaschool.onlinestore.enums.OrderStatus;
 import com.tsystems.javaschool.onlinestore.enums.PaymentStatus;
@@ -92,11 +89,11 @@ public class OrderController {
     @Secured("ROLE_USER")
     @RequestMapping(value = {"/addOrder",  "/addOrder/**"}, method = RequestMethod.POST)
     public String addOrderFromForm(@ModelAttribute("order") Order order, HttpSession session, Model model) {
-        long id_order=orderService.addOrder(order);
+        long orderID=orderService.addOrder(order);
         Cart cart = cartService.getCart((Cart)session.getAttribute("cart"));
         cartService.removeOrderProducts(cart, order.getOrderDetailsList());
         session.setAttribute("cart", cart);
-        return "redirect:/orders/" + id_order;
+        return "redirect:/orders/" + orderID;
     }
 
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })

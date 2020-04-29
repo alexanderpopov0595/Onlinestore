@@ -44,6 +44,7 @@ public class CartServiceImpl implements CartService {
      * Then method validates cart
      * @param id
      */
+    @Transactional
     public void addProductToCart(Cart cart,long id){
         Product product=productDao.selectProduct(id);
         cart.addProduct(product);
@@ -56,7 +57,6 @@ public class CartServiceImpl implements CartService {
      * Iff actual quantity is smaller than quantity in cart - method decrements quantity till cart quantity equals actual quantity
      * @param cart
      */
-    @Transactional
     public void validateCart(Cart cart){
         Product product;
         for(Map.Entry<Product, Integer> entry: cart.getProductMap().entrySet()){

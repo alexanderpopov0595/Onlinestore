@@ -67,7 +67,7 @@ public class Order implements Serializable {
 
 
     public Order() {
-        this.orderDetailsList = new ArrayList<OrderDetails>();
+        this.orderDetailsList = new ArrayList<>();
     }
 
     public void setId(long id) {

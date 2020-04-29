@@ -1,14 +1,14 @@
 package com.tsystems.javaschool.onlinestore.domain.order;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import com.sun.istack.internal.logging.Logger;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
 
 /**
  * Cart stores chosen products and their quantities
  */
-public class Cart {
+public class Cart implements Serializable {
 
     /**
      * Map contains products and their quantities

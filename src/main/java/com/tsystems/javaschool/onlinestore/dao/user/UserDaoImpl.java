@@ -37,10 +37,9 @@ public class UserDaoImpl implements UserDao {
                 .setParameter("login", login)
                 .setParameter("status", Status.ACTIVE)
                 .getSingleResult();
-
     }
     public List<Address> selectAddressList(long id){
-        return (List<Address>) entityManager.createQuery("SELECT a FROM Address a WHERE a.status=:status AND a.user.id=:id")
+        return entityManager.createQuery("SELECT a FROM Address a WHERE a.status=:status AND a.user.id=:id")
                 .setParameter("status", Status.ACTIVE)
                 .setParameter("id", id)
                 .getResultList();

@@ -39,6 +39,5 @@
                 </div>
             </c:forEach>
             <input type="submit" class="form-button" value="Search"/>
-            <input type="button" value="clc" onclick="clearEmptyForms();deleteEmpty();rewriteIndexes()"/>
     </form:form>
 </div>

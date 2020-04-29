@@ -115,12 +115,11 @@ public class UserController {
      * @param principal
      * @param request
      * @return user account page
-     * @throws ServletException
      */
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
     @RequestMapping(value = "/account/update", method = RequestMethod.POST)
     public String updateUserFromForm(@Valid User user, BindingResult result, Model model, Principal principal,
-                                     HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image) throws ServletException {
+                                     HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image)  {
         if(result.hasErrors()){
             return "users/update";
         }

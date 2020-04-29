@@ -5,7 +5,7 @@
             <a style="text-decoration: none; color:black" href="<c:url value="/products/${product.id}"/>">
                 <img src="<c:url value="/images/products/${product.id}.jpg"/>" width="300"
                      border="0" align="middle"
-                     onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
+                     onError="this.src='<c:url value="/resources/img"/>/product.jpg';" alt="Product image" />
                 <br/>
                 <c:out value="${product.name}"/>
             </a>

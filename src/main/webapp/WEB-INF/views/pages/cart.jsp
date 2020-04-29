@@ -38,7 +38,7 @@
                                 ${i.index+1}.
                         </td>
                         <td>
-                            <img src="<c:url value="/images/products/${product.key.id}.jpg"/>" width="50" border="0" align="left" onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
+                            <img src="<c:url value="/images/products/${product.key.id}.jpg"/>" width="50" border="0" align="left" onError="this.src='<c:url value="/resources/img"/>/product.jpg';" alt="Product image"/>
                         </td>
                         <td>
                             <a href="<c:url value="/products/${product.key.id}"/>">${product.key.name}</a>

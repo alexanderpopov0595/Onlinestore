@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.onlinestore.service.image;
 
 import com.tsystems.javaschool.onlinestore.exceptions.ImageUploadException;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
@@ -10,6 +11,8 @@ import java.io.IOException;
 
 @Service
 public class ImageServiceImpl implements ImageService {
+
+    private static final Logger logger= Logger.getLogger(ImageServiceImpl.class);
 
     /**
      * Method checks is image format is image/jpeg
@@ -31,15 +34,13 @@ public class ImageServiceImpl implements ImageService {
      */
     @Override
     public void saveImage(String folder, long id,  MultipartFile image) {
-        try {
-            String rootPath = System.getProperty("catalina.home");
-            File dir = new File(rootPath + File.separator + "images" + File.separator+folder+File.separator);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dir + File.separator + id+".jpg"));
+        String rootPath = System.getProperty("catalina.home");
+        File dir = new File(rootPath + File.separator + "images" + File.separator+folder+File.separator);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        try( BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dir + File.separator + id+".jpg"))) {
             stream.write(image.getBytes());
-            stream.close();
         } catch (IOException e) {
             throw new ImageUploadException("Unable to save image");
         }
@@ -55,10 +56,10 @@ public class ImageServiceImpl implements ImageService {
         try {
             if (!image.isEmpty()) {
                 validateImage(image);
-
                 saveImage(folder, id, image);
             }
         } catch (ImageUploadException e) {
+            logger.debug("Error while saving image: "+ e.getStackTrace());
         }
     }
 
@@ -70,9 +71,10 @@ public class ImageServiceImpl implements ImageService {
      */
     @Override
     public void deleteImage(String folder, long id) {
+        /*
         String rootPath = System.getProperty("catalina.home");
         String dir = rootPath + File.separator + "images" + File.separator+folder+File.separator;
         File file = new File(dir + File.separator + id+".jpg");
-        file.delete();
+        file.delete();*/
     }
 }

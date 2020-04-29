@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import com.tsystems.javaschool.onlinestore.enums.Status;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "users")
@@ -55,7 +54,7 @@ public class User implements Serializable {
 
     public User() {
 
-        this.addressList = new ArrayList<Address>();
+        this.addressList = new ArrayList<>();
     }
 
     public void setId(long id) {

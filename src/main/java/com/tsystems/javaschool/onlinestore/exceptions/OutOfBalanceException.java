@@ -8,7 +8,7 @@ public class OutOfBalanceException extends RuntimeException {
     /**
      * Total order price - user balance
      */
-    private long missmatch;
+    private final long missmatch;
 
     public OutOfBalanceException(long missmatch) {
         this.missmatch=missmatch;

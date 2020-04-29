@@ -2,6 +2,9 @@ package com.tsystems.javaschool.onlinestore.enums;
 
 import java.util.EnumSet;
 
+/**
+ * Enum represents payment statuses for order
+ */
 public enum PaymentStatus {
 
     NOTPAID("Order is not paid"),
@@ -22,7 +25,7 @@ public enum PaymentStatus {
      * @param code
      * @return PaymentStatus
      */
-    static public PaymentStatus getPaymentStatus(String code) {
+    public static PaymentStatus getPaymentStatus(String code) {
         for (PaymentStatus e : EnumSet.allOf(PaymentStatus.class)) {
             if (e.getCode().equals(code)) {
                 return e;

@@ -32,26 +32,26 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     public List<Order> selectOrderList() {
-        return (List<Order>) entityManager.createQuery("SELECT o FROM Order o")
+        return  entityManager.createQuery("SELECT o FROM Order o")
                 .getResultList();
     }
-    public List<Order> selectOrderList(long id_user) {
-        return (List<Order>) entityManager.createQuery("SELECT o FROM Order o WHERE o.user.id=:id")
-                .setParameter("id", id_user)
+    public List<Order> selectOrderList(long userID) {
+        return  entityManager.createQuery("SELECT o FROM Order o WHERE o.user.id=:id")
+                .setParameter("id", userID)
                 .getResultList();
     }
     public List<Order> selectOrderList(String login) {
-        return (List<Order>) entityManager.createQuery("SELECT o FROM Order o JOIN User u ON o.user.id=u.id WHERE u.login=:login")
+        return  entityManager.createQuery("SELECT o FROM Order o JOIN User u ON o.user.id=u.id WHERE u.login=:login")
                 .setParameter("login", login)
                 .getResultList();
     }
     public List<Order> selectOrderListByOrderStatus(OrderStatus orderStatus) {
-        return (List<Order>) entityManager.createQuery("SELECT o FROM Order o WHERE o.orderStatus=:orderStatus")
+        return  entityManager.createQuery("SELECT o FROM Order o WHERE o.orderStatus=:orderStatus")
                 .setParameter("orderStatus", orderStatus)
                 .getResultList();
     }
     public List<Order> selectOrderListByOrderStatus(String login, OrderStatus orderStatus) {
-        return (List<Order>) entityManager.createQuery("SELECT o FROM Order o JOIN User u ON o.user.id=u.id WHERE u.login=:login AND  o.orderStatus=:orderStatus")
+        return entityManager.createQuery("SELECT o FROM Order o JOIN User u ON o.user.id=u.id WHERE u.login=:login AND  o.orderStatus=:orderStatus")
                 .setParameter("login", login).setParameter("orderStatus", orderStatus)
                 .getResultList();
     }

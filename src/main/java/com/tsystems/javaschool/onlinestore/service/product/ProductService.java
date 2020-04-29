@@ -2,7 +2,6 @@ package com.tsystems.javaschool.onlinestore.service.product;
 
 import java.util.List;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Interface provides method to work with products

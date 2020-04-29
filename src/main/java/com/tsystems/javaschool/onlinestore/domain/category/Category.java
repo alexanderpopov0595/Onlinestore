@@ -30,7 +30,7 @@ public class Category implements Serializable {
     private List<Parameter> parameterList;
 
     public Category() {
-        this.parameterList = new ArrayList<Parameter>();
+        this.parameterList = new ArrayList<>();
     }
 
     public void setId(long id) {

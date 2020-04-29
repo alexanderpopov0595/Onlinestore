@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
      * @return map with unvailable products
      */
     public Map<Product, Integer> getUnavailableProductMap(List<OrderDetails> orderDetailsList){
-        Map<Product, Integer> unavailableProductMap=new HashMap<Product, Integer>();
+        Map<Product, Integer> unavailableProductMap=new HashMap<>();
         int quantity;
         int count;
         for (OrderDetails od : orderDetailsList) {
@@ -179,7 +179,7 @@ public class OrderServiceImpl implements OrderService {
      */
     public void checkAccess(String orderUserLogin, String login, boolean roleIsEmployee){
 
-        if (!(orderUserLogin.equals(login)) & !roleIsEmployee){
+        if (!(orderUserLogin.equals(login)) && !roleIsEmployee){
             throw new AccessDeniedException();
         }
 

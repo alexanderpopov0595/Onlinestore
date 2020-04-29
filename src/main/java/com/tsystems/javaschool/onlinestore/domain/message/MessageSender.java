@@ -2,8 +2,8 @@ package com.tsystems.javaschool.onlinestore.domain.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.istack.internal.logging.Logger;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -29,10 +29,9 @@ public class MessageSender {
                 try {
                     jsonList=mapper.writeValueAsString(productList);
                 } catch (JsonProcessingException e) {
-                    e.printStackTrace();
+                    logger.debug("Error while parsing product list to JSON: "+ e.getStackTrace());
                 }
-                TextMessage message=session.createTextMessage(jsonList);
-                return message;
+                return session.createTextMessage(jsonList);
             }
         });
     }

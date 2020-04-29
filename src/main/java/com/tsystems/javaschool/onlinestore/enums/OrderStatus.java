@@ -2,6 +2,9 @@ package com.tsystems.javaschool.onlinestore.enums;
 
 import java.util.EnumSet;
 
+/**
+ * Enum represents order statuses
+ */
 public enum OrderStatus {
 
     NOTSHIPPED("Order is waiting for shipping"),
@@ -23,7 +26,7 @@ public enum OrderStatus {
      * @param code
      * @return OrderStatus
      */
-    static public OrderStatus getOrderStatus(String code) {
+    public static  OrderStatus getOrderStatus(String code) {
         for (OrderStatus e : EnumSet.allOf(OrderStatus.class)) {
             if (e.getCode().equals(code)) {
                 return e;

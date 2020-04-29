@@ -53,18 +53,18 @@ public interface OrderService {
 
     /**
      * Method returns orders by order status
-     * @param OrderStatusCode
+     * @param orderStatusCode
      * @return
      */
-    public List<Order> selectOrderListByOrderStatus(String OrderStatusCode);
+    public List<Order> selectOrderListByOrderStatus(String orderStatusCode);
 
     /**
      * Method returns orders by user id and orders status
      * @param login
-     * @param OrderStatusCode
+     * @param orderStatusCode
      * @return
      */
-    public List<Order> selectOrderListByOrderStatus(String login, String OrderStatusCode);
+    public List<Order> selectOrderListByOrderStatus(String login, String orderStatusCode);
 
     /**
      * Method deletes order by id
