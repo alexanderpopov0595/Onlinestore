@@ -1,6 +1,8 @@
 package com.tsystems.javaschool.onlinestore.service.product;
 
 import java.util.List;
+
+import com.tsystems.javaschool.onlinestore.domain.product.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * Method loads product by id and loads product details and category paramters names
+     * Method loads product by id and loads product details and category parameters names
      * @param id
      * @return product
      */
@@ -73,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
         return productDao.selectProductListByCategory(category);
     }
 
-    public List<Product> searchProducts(Product product) {
+    public List<Product> searchProducts(ProductDTO product) {
         return productDao.searchProducts(product);
     }
 

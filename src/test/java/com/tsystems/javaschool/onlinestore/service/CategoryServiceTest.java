@@ -8,9 +8,7 @@ import com.tsystems.javaschool.onlinestore.service.category.CategoryService;
 import com.tsystems.javaschool.onlinestore.service.category.CategoryServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.web.servlet.tags.Param;
 
 import java.util.ArrayList;
 import java.util.List;

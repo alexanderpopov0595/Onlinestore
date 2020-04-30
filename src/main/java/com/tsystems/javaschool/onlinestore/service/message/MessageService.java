@@ -8,5 +8,5 @@ public interface MessageService {
     /**
      * Method sends message
      */
-    public void sendMessage();
+    void sendMessage();
 }

@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
      * map
      *
      * @param orderDetailsList
-     * @return map with unvailable products
+     * @return map with unavailable products
      */
     public Map<Product, Integer> getUnavailableProductMap(List<OrderDetails> orderDetailsList){
         Map<Product, Integer> unavailableProductMap=new HashMap<>();
@@ -172,7 +172,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * Method checks can user see that order
-     * Method returs true If user login from order and login of user trying to access order are not the same and role isn't employee
+     * Method returns true If user login from order and login of user trying to access order are not the same and role isn't employee
 
      * @param login
      * @param roleIsEmployee

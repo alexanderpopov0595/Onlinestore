@@ -14,11 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -38,13 +35,6 @@ public class Product implements Serializable {
 
     @Column(name = "price")
     private long price;
-
-    @Transient
-    @JsonIgnore
-    private long minPrice;
-    @Transient
-    @JsonIgnore
-    private long maxPrice;
 
     @Column(name = "weight")
     private long weight;
@@ -86,22 +76,6 @@ public class Product implements Serializable {
 
     public long getPrice() {
         return price;
-    }
-
-    public void setMinPrice(long minPrice) {
-        this.minPrice = minPrice;
-    }
-
-    public long getMinPrice() {
-        return minPrice;
-    }
-
-    public void setMaxPrice(long maxPrice) {
-        this.maxPrice = maxPrice;
-    }
-
-    public long getMaxPrice() {
-        return maxPrice;
     }
 
     public void setPrice(long price) {

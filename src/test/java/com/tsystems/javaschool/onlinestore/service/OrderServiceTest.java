@@ -10,18 +10,13 @@ import com.tsystems.javaschool.onlinestore.domain.user.Deposit;
 import com.tsystems.javaschool.onlinestore.domain.user.User;
 import com.tsystems.javaschool.onlinestore.enums.PaymentStatus;
 import com.tsystems.javaschool.onlinestore.exceptions.AccessDeniedException;
-import com.tsystems.javaschool.onlinestore.exceptions.CategoryIsAlreadyExistingException;
 import com.tsystems.javaschool.onlinestore.exceptions.OutOfBalanceException;
 import com.tsystems.javaschool.onlinestore.exceptions.OutOfQuantityException;
 import com.tsystems.javaschool.onlinestore.service.message.MessageService;
-import com.tsystems.javaschool.onlinestore.service.order.OrderService;
 import com.tsystems.javaschool.onlinestore.service.order.OrderServiceImpl;
 import com.tsystems.javaschool.onlinestore.service.sales.SalesService;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.internal.matchers.Or;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -141,7 +136,7 @@ public class OrderServiceTest {
 
     @Test
     public void shouldTrowAccessDeniedExceptionTwo() {
-        orderService.checkAccess("login", "anotherlogin", true);
+        orderService.checkAccess("login", "another login", true);
     }
 
     @Test

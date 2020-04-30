@@ -1,10 +1,9 @@
 package com.tsystems.javaschool.onlinestore.service;
 
-import com.tsystems.javaschool.onlinestore.dao.product.ProductDao;
 import com.tsystems.javaschool.onlinestore.dao.product.ProductDaoImpl;
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
 import com.tsystems.javaschool.onlinestore.domain.category.Parameter;
-import com.tsystems.javaschool.onlinestore.domain.product.Product;
+import com.tsystems.javaschool.onlinestore.domain.product.ProductDTO;
 import com.tsystems.javaschool.onlinestore.domain.product.ProductDetails;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,16 +16,16 @@ import static org.junit.Assert.assertEquals;
 public class ProductDaoSearchTest {
 
     private ProductDaoImpl productDao = new ProductDaoImpl();
-    private Product product;
+    private ProductDTO product;
 
     @Before
     public void setUp() {
-        product = new Product();
+        product = new ProductDTO();
     }
 
     @Test
     public void shouldReturnDefaultSQL() {
-        assertEquals( "SELECT * FROM products  WHERE quantity>0 ", productDao.prepareSql(new Product()));
+        assertEquals( "SELECT * FROM products  WHERE quantity>0 ", productDao.prepareSql(new ProductDTO()));
     }
 
     @Test
@@ -71,8 +70,8 @@ public class ProductDaoSearchTest {
         category.setId(1);
         Parameter p = new Parameter();
         p.setId(1);
-        List<Parameter> paramterList = new ArrayList<>();
-        paramterList.add(p);
+        List<Parameter> parameterList = new ArrayList<>();
+        parameterList.add(p);
         ProductDetails pd = new ProductDetails();
         pd.setValue("value");
         pd.setParameter(p);
@@ -92,9 +91,9 @@ public class ProductDaoSearchTest {
         p1.setId(1);
         Parameter p2 = new Parameter();
         p2.setId(2);
-        List<Parameter> paramterList = new ArrayList<>();
-        paramterList.add(p1);
-        paramterList.add(p2);
+        List<Parameter> parameterList = new ArrayList<>();
+        parameterList.add(p1);
+        parameterList.add(p2);
         ProductDetails pd1 = new ProductDetails();
         pd1.setValue("value1");
         pd1.setParameter(p1);
@@ -118,9 +117,9 @@ public class ProductDaoSearchTest {
         p1.setId(1);
         Parameter p2 = new Parameter();
         p2.setId(2);
-        List<Parameter> paramterList = new ArrayList<>();
-        paramterList.add(p1);
-        paramterList.add(p2);
+        List<Parameter> parameterList = new ArrayList<>();
+        parameterList.add(p1);
+        parameterList.add(p2);
         ProductDetails pd1 = new ProductDetails();
         pd1.setValue("value1");
         pd1.setParameter(p1);

@@ -7,32 +7,46 @@ import com.tsystems.javaschool.onlinestore.domain.product.Product;
 import com.tsystems.javaschool.onlinestore.domain.user.User;
 
 /**
- * Inteface provides methods to work with sales in database
+ * Interface provides methods to work with sales in database
  *
  */
 public interface SalesDao {
 
     /**
      * Method adds sale to database
-     * @param sale with information about purchased order
+     * @param sales with information about purchased order
      */
-    public void addSales(Sales sales);
+     void addSales(Sales sales);
 
     /**
      * Method deletes sales by order details id
-     * @param order details id
+     * @param id of order details
      */
-    public void restoreSales(long id);
+     void restoreSales(long id);
 
+    /**
+     * Method returms top-10 products
+     * @return product list
+     */
+     List<Product> getTopProductsList();
 
+    /**
+     * Method returns top-10 users
+     * @return user list
+     */
+     List<User> getTopUserList();
 
-    public List<Product> getTopProductsList();
+    /**
+     * Method returns sales per week
+     * @return sales list
+     */
+     List<Sales> getWeekSales();
 
-    public List<User> getTopUserList();
-
-    public List<Sales> getWeekSales();
-
-    public List<Sales> getMonthSales();
+    /**
+     * Method returns sales per month
+     * @return sales list
+     */
+    List<Sales> getMonthSales();
 
 
 }

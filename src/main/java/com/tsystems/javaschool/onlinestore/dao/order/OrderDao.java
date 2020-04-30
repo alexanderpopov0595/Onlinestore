@@ -12,54 +12,54 @@ public interface OrderDao {
     /*
      * Method adds order to database
      */
-    public void addOrder(Order order);
+    void addOrder(Order order);
 
     /*
      * Method updates order
      */
-    public void updateOrder(Order oder);
+   void updateOrder(Order oder);
 
 
     /*
      * Method returns order
      */
-    public Order selectOrder(long id);
+     Order selectOrder(long id);
 
 
     /*
      * Methods returns all orders
      */
-    public List<Order> selectOrderList();
+   List<Order> selectOrderList();
 
-    public List<Order> selectOrderList(String login);
+    List<Order> selectOrderList(String login);
 
-    public List<Order> selectOrderList(long userID);
+    List<Order> selectOrderList(long userID);
 
     /*
      * Method returns order list by order status
      */
-    public List<Order> selectOrderListByOrderStatus(OrderStatus orderStatus);
+    List<Order> selectOrderListByOrderStatus(OrderStatus orderStatus);
 
-    public List<Order> selectOrderListByOrderStatus(String login,OrderStatus orderStatus);
+     List<Order> selectOrderListByOrderStatus(String login,OrderStatus orderStatus);
 
     /*
      * Method checks product quantity
      */
-    public int selectProductQuantity(long id);
+    int selectProductQuantity(long id);
 
     /*
      * Method decrease/increase product quantity from order
      */
-    public void changeProductQuantityFromOrder(long id, int quantity);
+     void changeProductQuantityFromOrder(long id, int quantity);
 
     /*
      * Method deletes order
      */
-    public void deleteOrder(long id);
+     void deleteOrder(long id);
 
     /*
      * Method deletes order_details
      */
-    public void deleteOrderDetails(long id);
+ void deleteOrderDetails(long id);
 
 }

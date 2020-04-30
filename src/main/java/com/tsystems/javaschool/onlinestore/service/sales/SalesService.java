@@ -16,35 +16,35 @@ public interface SalesService {
      * Method adds order to sales table
      * @param order
      */
-    public void addSales(Order order);
+     void addSales(Order order);
 
     /**
      * Method removes order details from sales table
      * @param orderDetailsList
      */
-    public void restoreSales(List<OrderDetails> orderDetailsList);
+     void restoreSales(List<OrderDetails> orderDetailsList);
 
     /**
      * Method return top-10 products
      * @return products list
      */
-    public List<Product> getTopProductsList();
+     List<Product> getTopProductsList();
 
     /**
      * Method returns top-10 users
      * @return users list
      */
-    public List<User> getTopUserList();
+    List<User> getTopUserList();
 
     /**
      * Method returns sales per week
      * @return sales list
      */
-    public List<Sales> getWeekSales();
+    List<Sales> getWeekSales();
 
     /**
      * Method returns sales per month
      * @return sales list
      */
-    public List<Sales> getMonthSales();
+    List<Sales> getMonthSales();
 }

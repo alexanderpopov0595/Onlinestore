@@ -1,17 +1,14 @@
 package com.tsystems.javaschool.onlinestore.service;
 
 import com.tsystems.javaschool.onlinestore.dao.product.ProductDao;
-import com.tsystems.javaschool.onlinestore.dao.product.ProductDaoImpl;
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
 import com.tsystems.javaschool.onlinestore.domain.category.Parameter;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
 import com.tsystems.javaschool.onlinestore.domain.product.ProductDetails;
-import com.tsystems.javaschool.onlinestore.service.message.MessageService;
 import com.tsystems.javaschool.onlinestore.service.product.ProductService;
 import com.tsystems.javaschool.onlinestore.service.product.ProductServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.web.servlet.tags.Param;
 
 import java.util.ArrayList;
 import java.util.List;

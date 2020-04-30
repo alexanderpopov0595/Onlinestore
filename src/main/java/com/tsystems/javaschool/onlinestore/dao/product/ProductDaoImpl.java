@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import com.tsystems.javaschool.onlinestore.domain.product.ProductDTO;
 import org.springframework.stereotype.Repository;
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
@@ -30,7 +31,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
 
-    public List<Product> searchProducts(Product product) {
+    public List<Product> searchProducts(ProductDTO product) {
         String SQL_SEARCH_QUERY=prepareSql(product);
         List<Product> productList=new ArrayList<>();
         Product p;
@@ -49,7 +50,7 @@ public class ProductDaoImpl implements ProductDao {
         }
         return productList;
     }
-    public String prepareSql(Product product){
+    public String prepareSql(ProductDTO product){
         String SQL_SELECT = "SELECT * FROM products ";
         String SQL_WHERE = " WHERE quantity>0 ";
         String SQL_NAME = "";

@@ -13,37 +13,37 @@ public interface CategoryService {
      * @param category
      * @return
      */
-    public long addCategory(Category category);
+    long addCategory(Category category);
 
     /**
      *  Method updates category
      * @param category
      */
-    public void updateCategory(Category category);
+    void updateCategory(Category category);
 
     /**
      * Methods returns category by id
      * @param id
      * @return
      */
-    public Category selectCategory(long id);
+    Category selectCategory(long id);
 
     /**
      * Method returns category list
      * @return
      */
-    public List<Category> selectCategoryList();
+     List<Category> selectCategoryList();
 
     /**
      * Method returns category list with parameters
      * @return
      */
-    public List<Category> selectCategoryListWithParameters();
+    List<Category> selectCategoryListWithParameters();
 
     /**
      * Method deletes category
      * @param category
      */
-    public void deleteCategory(Category category);
+    void deleteCategory(Category category);
 
 }

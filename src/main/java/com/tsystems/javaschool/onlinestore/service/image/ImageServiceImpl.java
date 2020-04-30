@@ -64,17 +64,5 @@ public class ImageServiceImpl implements ImageService {
     }
 
 
-    /**
-     * Method gets full image path by folder and image id and deletes image
-     * @param folder
-     * @param id
-     */
-    @Override
-    public void deleteImage(String folder, long id) {
-        /*
-        String rootPath = System.getProperty("catalina.home");
-        String dir = rootPath + File.separator + "images" + File.separator+folder+File.separator;
-        File file = new File(dir + File.separator + id+".jpg");
-        file.delete();*/
-    }
+
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
 
 /**
- * JPA implementation of CategorytServiceDao
+ * JPA implementation of Category dao
  */
 @Repository
 public class CategoryDaoImpl implements CategoryDao {

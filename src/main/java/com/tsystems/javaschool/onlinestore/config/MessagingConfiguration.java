@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 public class MessagingConfiguration {
 
     @Resource
-    private Environment env;
+    Environment env;
 
     @Bean
     public ActiveMQConnectionFactory connectionFactory(){

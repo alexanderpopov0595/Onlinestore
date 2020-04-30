@@ -6,7 +6,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import javax.naming.OperationNotSupportedException;
 
 @ControllerAdvice
 public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
@@ -20,7 +24,7 @@ public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
      * @return signup/update page
      */
     @ExceptionHandler(LoginIsCurrentlyExisting.class)
-    public String handleLoginIsCurrenlyExistingException(LoginIsCurrentlyExisting ex, Model model) {
+    public String handleLoginIsCurrentlyExistingException(LoginIsCurrentlyExisting ex, Model model) {
         logger.debug("Trying to add/update user with already existing login");
         model.addAttribute("error", ex.getMessage());
         model.addAttribute("user", ex.getUser());
@@ -39,7 +43,7 @@ public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
      * @return form/update page
      */
     @ExceptionHandler(CategoryIsAlreadyExistingException.class)
-    public String handleCategoryIsCurrenlyExistingException(CategoryIsAlreadyExistingException ex, Model model) {
+    public String handleCategoryIsCurrentlyExistingException(CategoryIsAlreadyExistingException ex, Model model) {
         logger.debug("Trying to add category with already existing name");
         model.addAttribute("error", ex.getMessage());
         model.addAttribute("category", ex.getCategory());
@@ -101,4 +105,8 @@ public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
         model.addAttribute("message", "Content not found");
         return "errors/content";
     }
+
+
+
+
 }

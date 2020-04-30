@@ -2,6 +2,7 @@ package com.tsystems.javaschool.onlinestore.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
@@ -18,5 +19,6 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
 
 }

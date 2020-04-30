@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 
 /**
- * Controller is resposible for requests starting with "/categories"
+ * Controller is responsible for requests starting with "/categories"
  */
 @Controller
 @RequestMapping("/categories")

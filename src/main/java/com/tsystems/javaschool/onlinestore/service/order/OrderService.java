@@ -4,7 +4,7 @@ import java.util.List;
 import com.tsystems.javaschool.onlinestore.domain.order.Order;
 
 /**
- * Inteface provides methods to work with orders
+ * Interface provides methods to work with orders
  */
 public interface OrderService {
 
@@ -13,13 +13,13 @@ public interface OrderService {
      * @param order
      * @return order id
      */
-    public long addOrder(Order order);
+    long addOrder(Order order);
 
     /**
      * Method updates order
      * @param order
      */
-    public void updateOrder(Order order);
+    void updateOrder(Order order);
 
     /**
      * Method returns order by id
@@ -28,35 +28,35 @@ public interface OrderService {
      * @param isRoleEmployee
      * @return
      */
-    public Order selectOrder(long id, String login, boolean isRoleEmployee);
+     Order selectOrder(long id, String login, boolean isRoleEmployee);
 
 
     /**
      * Method returns all orders
      * @return order list
      */
-    public List<Order> selectOrderList();
+     List<Order> selectOrderList();
 
     /**
      * Method returns all orders by user login
      * @param login
      * @return
      */
-    public List<Order> selectOrderList( String login);
+   List<Order> selectOrderList( String login);
 
     /**
      * Method returns all orders by user id
      * @param id
      * @return
      */
-    public List<Order> selectOrderList(long id);
+     List<Order> selectOrderList(long id);
 
     /**
      * Method returns orders by order status
      * @param orderStatusCode
      * @return
      */
-    public List<Order> selectOrderListByOrderStatus(String orderStatusCode);
+ List<Order> selectOrderListByOrderStatus(String orderStatusCode);
 
     /**
      * Method returns orders by user id and orders status
@@ -64,11 +64,11 @@ public interface OrderService {
      * @param orderStatusCode
      * @return
      */
-    public List<Order> selectOrderListByOrderStatus(String login, String orderStatusCode);
+    List<Order> selectOrderListByOrderStatus(String login, String orderStatusCode);
 
     /**
      * Method deletes order by id
      * @param id
      */
-    public void deleteOrder(long id, String login, boolean isRoleEmployee);
+    void deleteOrder(long id, String login, boolean isRoleEmployee);
 }

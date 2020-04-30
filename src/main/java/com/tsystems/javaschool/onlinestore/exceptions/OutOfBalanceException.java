@@ -1,7 +1,7 @@
 package com.tsystems.javaschool.onlinestore.exceptions;
 
 /**
- * Exception thrown when user doesn't have enough balance for pusrchase order
+ * Exception thrown when user doesn't have enough balance for purchase order
  */
 public class OutOfBalanceException extends RuntimeException {
 

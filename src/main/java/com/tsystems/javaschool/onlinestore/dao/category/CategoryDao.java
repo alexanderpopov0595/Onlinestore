@@ -12,56 +12,56 @@ public interface CategoryDao {
      * Method adds category to database
      * @param category
      */
-    public void addCategory(Category category);
+    void addCategory(Category category);
 
     /**
      * Method updates category in database
      * @param category
      */
-    public void updateCategory(Category category);
+     void updateCategory(Category category);
 
     /**
      * Methods returns category by id
      * @param id
      * @return
      */
-    public Category selectCategory(long id);
+    Category selectCategory(long id);
 
     /**
      * Methods returns category by category name
      * @param name
      * @return category
      */
-    public Category selectCategory(String name);
+   Category selectCategory(String name);
 
     /**
      *  Method returns category list
      * @return category list
      */
-    public List<Category> selectCategoryList();
+   List<Category> selectCategoryList();
 
     /**
      * Method deletes category by id
      * @param id
      */
-    public void deleteCategory(long id);
+     void deleteCategory(long id);
 
     /**
      * Method deletes category parameter
      * @param id
      */
-    public void deleteParameter(long id);
+    void deleteParameter(long id);
 
     /**
      * Method deletes category products
      * @param id
      */
-    public void deleteCategoryProducts(long id);
+   void deleteCategoryProducts(long id);
 
     /**
      * Method delete category parameter product details
      * @param id
      */
-    public void deleteCategoryParameterProductDetails(long id);
+    void deleteCategoryParameterProductDetails(long id);
 }
 

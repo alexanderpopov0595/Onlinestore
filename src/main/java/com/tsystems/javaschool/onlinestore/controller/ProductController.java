@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.onlinestore.controller;
 
+import com.tsystems.javaschool.onlinestore.domain.product.ProductDTO;
 import com.tsystems.javaschool.onlinestore.service.image.ImageService;
 import com.tsystems.javaschool.onlinestore.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,7 @@ public class ProductController {
      */
     @Secured("ROLE_EMPLOYEE")
     @RequestMapping(value = "/{id}/update", method = RequestMethod.GET)
-    public String showProdutUpdateForm(@PathVariable long id, Model model) {
+    public String showProduсtUpdateForm(@PathVariable long id, Model model) {
         model.addAttribute("categoryList", categoryService.selectCategoryListWithParameters());
         model.addAttribute("product", productService.selectProduct(id));
         return "products/update";
@@ -132,7 +133,7 @@ public class ProductController {
     @RequestMapping(value="/searchByName", method = RequestMethod.POST)
    public String searchProductByName(Model model, HttpServletRequest request){
         String name=request.getParameter("name");
-        Product product=new Product();
+        ProductDTO product=new ProductDTO();
         product.setName(name);
         model.addAttribute("productList", productService.searchProducts(product));
         return "products/list";
@@ -146,7 +147,7 @@ public class ProductController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String showCustomProductSearchForm(Model model) {
         model.addAttribute("categoryList", categoryService.selectCategoryListWithParameters());
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new ProductDTO());
         return "products/search";
     }
 
@@ -157,7 +158,7 @@ public class ProductController {
      * @return products page
      */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String searchProductFromForm(@ModelAttribute("product") Product product, Model model) {
+    public String searchProductFromForm(@ModelAttribute("product") ProductDTO product, Model model) {
         model.addAttribute("productList", productService.searchProducts(product));
         return "products/list";
     }

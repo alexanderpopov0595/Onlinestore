@@ -11,7 +11,7 @@ public interface ImageService {
      * Method checks image's format
      * @param image
      */
-    public void validateImage(MultipartFile image);
+  void validateImage(MultipartFile image);
 
     /**
      * Method saves image to server folder
@@ -19,7 +19,7 @@ public interface ImageService {
      * @param id (user id, product id, etc)
      * @param image
      */
-    public void saveImage(String folder, long id,  MultipartFile image);
+     void saveImage(String folder, long id,  MultipartFile image);
 
     /**
      * Method gets image from form, folder name and file name and adds it to server
@@ -27,12 +27,7 @@ public interface ImageService {
      * @param folder
      * @param id
      */
-    public void uploadImage(MultipartFile image, String folder, long id);
+    void uploadImage(MultipartFile image, String folder, long id);
 
-    /**
-     * Method deletes image by name
-     * @param folder
-     * @param id
-     */
-    public void deleteImage(String folder, long id);
+
 }

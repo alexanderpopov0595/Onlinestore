@@ -13,13 +13,13 @@ public interface DepositService {
      * @param deposit with information about deposit number and password
      * @param login of owner
      */
-    public void addDeposit(Deposit deposit, String login);
+    void addDeposit(Deposit deposit, String login);
 
     /**
      * Method updates deposit in database
      * @param deposit with information about deposit number, password and owner
      */
-    public void updateDeposit(Deposit deposit);
+    void updateDeposit(Deposit deposit);
 
 
     /**
@@ -27,20 +27,20 @@ public interface DepositService {
      * @param login
      * @return deposit object
      */
-    public Deposit selectDeposit(String login);
+    Deposit selectDeposit(String login);
 
 
     /**
      * Method updates deposit balance
      * @param deposit
      */
-    public void updateDepositBalance(Deposit deposit);
+     void updateDepositBalance(Deposit deposit);
 
 
     /**
      * Method deletes deposit from database
      *@param deposit with information about deposit number, password and owner
      */
-    public void deleteDeposit(Deposit deposit);
+     void deleteDeposit(Deposit deposit);
 
 }

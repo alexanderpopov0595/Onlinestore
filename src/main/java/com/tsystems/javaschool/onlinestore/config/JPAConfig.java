@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 public class JPAConfig {
 
     @Resource
-    private Environment env;
+    Environment env;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {

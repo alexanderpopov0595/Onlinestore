@@ -10,10 +10,10 @@ public class AccessDeniedController {
 
     /**
      * Method returns 403 page
-     * @return
+     * @return 403 error page
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String showAccesssDenied() {
+    public String showAccessDenied() {
         return "errors/403";
     }
 }

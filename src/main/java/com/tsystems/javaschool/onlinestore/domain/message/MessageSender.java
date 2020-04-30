@@ -16,8 +16,12 @@ public class MessageSender {
 
     private static final Logger logger= Logger.getLogger(MessageSender.class);
 
+    private JmsTemplate jmsTemplate;
+
     @Autowired
-    JmsTemplate jmsTemplate;
+    public MessageSender(JmsTemplate jmsTemplate){
+        this.jmsTemplate=jmsTemplate;
+    }
 
     public void sendMessage(final List<Product> productList) {
 

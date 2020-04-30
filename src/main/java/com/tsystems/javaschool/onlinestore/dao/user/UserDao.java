@@ -13,45 +13,45 @@ public interface UserDao {
      * Method adds user to database     *
      * @param user
      */
-    public void addUser(User user);
+    void addUser(User user);
 
     /**
      * Method updates user and user addresses in database
      * @param user
      */
-    public void updateUser(User user);
+    void updateUser(User user);
 
     /**
      * Method returns user by id
      * @param id
      * @return user
      */
-    public User selectUser(long id);
+    User selectUser(long id);
 
     /**
      * Method returns user by login with active status
      * @param login
      * @return user
      */
-    public User selectUser(String login);
+     User selectUser(String login);
 
     /**
      * Method returns addresses with active status by user id
      * @param id
      * @return address list
      */
-    public List<Address> selectAddressList(long id);
+     List<Address> selectAddressList(long id);
 
     /**
      * Method changes user status to DELETED by user id
      * @param id
      */
-    public void deleteUser(long id);
+     void deleteUser(long id);
 
     /**
      * Method changes addresses status to DELETED by user id
      * @param id
      */
-    public void deleteAddresses(long id);
+     void deleteAddresses(long id);
 
 }

@@ -105,7 +105,7 @@ public class DepositController {
     }
 
     /**
-     * Method gets deposit with setted balance, which equals to added amount of
+     * Method gets deposit with set balance, which equals to added amount of
      * money	 *
      * @param deposit
      * @return deposit page

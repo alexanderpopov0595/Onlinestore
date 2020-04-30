@@ -18,27 +18,27 @@ public interface CartService {
      * @param cart
      * @return
      */
-    public Cart getCart(Cart cart);
+    Cart getCart(Cart cart);
 
     /**
      * Method adds product to cart by id
      * @param cart
      * @param id
      */
-    public void addProductToCart(Cart cart, long id);
+    void addProductToCart(Cart cart, long id);
 
     /**
      * Method validates product quantity in cart and in database
      * @param cart
      */
-    public void validateCart(Cart cart);
+     void validateCart(Cart cart);
 
     /**
      * Method removes purchased products from cart
      * @param cart
      * @param orderDetailsList
      */
-    public void removeOrderProducts(Cart cart, List<OrderDetails> orderDetailsList);
+     void removeOrderProducts(Cart cart, List<OrderDetails> orderDetailsList);
 
     /**
      * Method returns product map by product id from cart
@@ -46,7 +46,7 @@ public interface CartService {
      * @param id
      * @return product map
      */
-    public Map<Product, Integer> addProductToOrder(Cart cart, long id);
+     Map<Product, Integer> addProductToOrder(Cart cart, long id);
 
 
 
