@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.tsystems.javaschool.onlinestore.domain.category.Parameter;
 
+/**
+ * Class represents product parameters
+ */
 @Entity
 @Table(name = "product_details")
 

@@ -58,7 +58,7 @@
                             <input type="hidden" name="orderDetailsList[${i.index}].id" value="0"/>
                         </td>
                         <td>
-                            <input type="number" class="form-input" name="orderDetailsList[${i.index}].quantity" value="${product.value}" />
+                            <input type="number" min="1" class="form-input" name="orderDetailsList[${i.index}].quantity" value="${product.value}" />
                         </td>
                         <td>
                             <c:out value="${product.key.price*product.value}"/>
@@ -70,6 +70,13 @@
             </c:forEach>
         </table>
     <br/>
-    <input type="submit" class="form-button" id="submit" value="Save order" />
+    <c:if test="${empty productMap }">
+        <input type="submit" class="form-button" id="submit" value="Save order" disabled/>
+    </c:if>
+    <c:if test="${!empty productMap }">
+        <input type="submit" class="form-button" id="submit" value="Save order" />
+    </c:if>
+
+
 </form:form>
 </div>

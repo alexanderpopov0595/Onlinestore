@@ -47,6 +47,10 @@ public class DepositServiceImpl implements DepositService {
         }
     }
 
+    /**
+     * Method updates deposit in database
+     * @param deposit with information about deposit number, password and owner
+     */
     @Override
     public void updateDeposit(Deposit deposit) {
         depositDao.updateDeposit(deposit);
@@ -83,6 +87,10 @@ public class DepositServiceImpl implements DepositService {
 
     }
 
+    /**
+     * Method deletes deposit from database
+     *@param deposit with information about deposit number, password and owner
+     */
     @Override
     public void deleteDeposit(Deposit deposit) {
         depositDao.deleteDeposit(deposit.getId());

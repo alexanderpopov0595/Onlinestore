@@ -5,11 +5,10 @@
     <div class="form-header">
         <h3>Update category</h3>
     </div>
-        <c:out value="${error}" />
         <input type="hidden" name="id" value="${category.id}"/>
-        <input type="hidden" name="status" value="ACTIVE"/>
         <div class="form-element">
             <img src="<c:url value="/images/categories/${category.id}.jpg"/>" width="300" border="0" align="center"	onError="this.src='<c:url value="/resources/img"/>/category.jpg';" />
+            <p class="errors">${error}</p>
         </div>
         <div class="form-element">
             <label>Upload image</label>
@@ -20,6 +19,17 @@
             <form:input type="text" path="name" value="${category.name}" class="form-input" placeholder="Category name" required="true" />
             <form:errors path="name" cssClass="errors"/>
         </div>
+        <c:if test="${category.status=='ACTIVE'}">
+            <input type="hidden" name="status" value="ACTIVE"/>
+        </c:if>
+        <c:if test="${category.status!='ACTIVE'}">
+            <div class="form-element">
+                <select id="status" class="form-input" name="status" required>
+                    <option id="deleted" checked value="DELETED">Category is deleted</option>
+                    <option id="active" value="ACTIVE">Restore category</option>
+                </select>
+            </div>
+        </c:if>
         <c:forEach var="parameter" items="${category.parameterList}" varStatus="i">
             <div class="dynamic" id="${i.index}">
                 <input type="hidden" name="parameterList[${i.index}].id"	value="${parameter.id}" />

@@ -4,6 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+/**
+ * Class represents user's deposit
+ */
 @Entity
 @Table(name="deposits")
 public class Deposit implements Serializable {

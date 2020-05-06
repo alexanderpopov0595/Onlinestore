@@ -73,6 +73,10 @@ public class CategoryServiceImpl implements CategoryService {
         return category;
     }
 
+    /**
+     * Method returns category list
+     * @return category list
+     */
     public List<Category> selectCategoryList() {
         return categoryDao.selectCategoryList();
     }

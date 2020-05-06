@@ -20,9 +20,9 @@ public class ImageServiceImpl implements ImageService {
      * @param image
      */
     @Override
-    public void validateImage(MultipartFile image) {
+    public void validateImage(MultipartFile image, String folder , long id) {
         if (!image.getContentType().equals("image/jpeg")) {
-            throw new ImageUploadException("Only JPG images accepted");
+            throw new ImageUploadException("Only JPG images accepted", folder ,id);
         }
     }
 
@@ -42,7 +42,8 @@ public class ImageServiceImpl implements ImageService {
         try( BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dir + File.separator + id+".jpg"))) {
             stream.write(image.getBytes());
         } catch (IOException e) {
-            throw new ImageUploadException("Unable to save image");
+            logger.error("Unable to save image: "+ e.getStackTrace());
+            throw new ImageUploadException("Unable to save image", folder, id);
         }
     }
 
@@ -53,13 +54,9 @@ public class ImageServiceImpl implements ImageService {
      * @param id
      */
     public void uploadImage(MultipartFile image, String folder, long id) {
-        try {
-            if (!image.isEmpty()) {
-                validateImage(image);
-                saveImage(folder, id, image);
-            }
-        } catch (ImageUploadException e) {
-            logger.debug("Error while saving image: "+ e.getStackTrace());
+        if (!image.isEmpty()) {
+            validateImage(image, folder ,id);
+            saveImage(folder, id, image);
         }
     }
 

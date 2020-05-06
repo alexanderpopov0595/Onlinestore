@@ -64,6 +64,9 @@ public class CartServiceImpl implements CartService {
             while(entry.getValue()>product.getQuantity()){
                 entry.setValue(entry.getValue()-1);
             }
+            if(entry.getValue()==0){
+                cart.getProductMap().remove(entry.getKey());
+            }
         }
     }
 

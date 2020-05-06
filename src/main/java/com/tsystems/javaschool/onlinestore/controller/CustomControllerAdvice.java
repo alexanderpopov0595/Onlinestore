@@ -6,16 +6,12 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import javax.naming.OperationNotSupportedException;
 
 @ControllerAdvice
-public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
+public class CustomControllerAdvice  {
 
-    private static final Logger logger=Logger.getLogger(CustomControllerAdvice.class);
+    private static final Logger log=Logger.getLogger(CustomControllerAdvice.class);
 
     /**
      * Method handles exception when trying to add/update user with already existing login in database
@@ -25,7 +21,7 @@ public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(LoginIsCurrentlyExisting.class)
     public String handleLoginIsCurrentlyExistingException(LoginIsCurrentlyExisting ex, Model model) {
-        logger.debug("Trying to add/update user with already existing login");
+        log.debug("Trying to add/update user with already existing login");
         model.addAttribute("error", ex.getMessage());
         model.addAttribute("user", ex.getUser());
         if(ex.getUser().getId()==0){
@@ -44,7 +40,7 @@ public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(CategoryIsAlreadyExistingException.class)
     public String handleCategoryIsCurrentlyExistingException(CategoryIsAlreadyExistingException ex, Model model) {
-        logger.debug("Trying to add category with already existing name");
+        log.debug("Trying to add category with already existing name");
         model.addAttribute("error", ex.getMessage());
         model.addAttribute("category", ex.getCategory());
         if(ex.getCategory().getId()==0){
@@ -73,7 +69,7 @@ public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(NoDepositExistingException.class)
     public String handleNoDepositExistingException() {
-        logger.debug("No deposit found");
+        log.debug("No deposit found");
         return "redirect:/deposits/addDeposit";
     }
 
@@ -85,7 +81,7 @@ public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DepositAlreadyExistingException.class)
     public String handleDepositAlreadyExistingException(DepositAlreadyExistingException ex) {
-        logger.debug("Deposit is already existing");
+        log.debug("Deposit is already existing");
         return "errors/deposit";
     }
 
@@ -96,14 +92,33 @@ public class CustomControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public String handleEmptyResultException(EmptyResultDataAccessException ex, Model model){
-        model.addAttribute("message", "Content not found");
-        return "errors/content";
+        return "errors/exception";
     }
-    @ExceptionHandler(NullPointerException.class)
+   @ExceptionHandler(NullPointerException.class)
     public String handleEmptyResultException(NullPointerException ex, Model model){
-        logger.debug("Nullpointer exception was thrown: "+ ex.getStackTrace());
-        model.addAttribute("message", "Content not found");
-        return "errors/content";
+        log.error("Nullpointer exception was thrown: "+ ex.getMessage());
+       return "errors/exception";
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public String handleEmptyResultException(NumberFormatException ex, Model model){
+        log.error("Nullpointer exception was thrown: "+ ex.getMessage());
+        return "errors/exception";
+    }
+
+    @ExceptionHandler(ImageUploadException.class)
+    public String handleImageUploadException(ImageUploadException ex, Model model){
+        log.error(ex.getMessage());
+        model.addAttribute("error", ex.getMessage());
+        if(ex.getFolder().equals("users")){
+            return "redirect:/"+ex.getFolder()+"/account/update?error="+ex.getMessage();
+        }
+        return "redirect:/"+ex.getFolder()+"/"+ ex.getId()+"/update?error="+ex.getMessage();
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public String error404(Exception ex) {
+        return "errors/exception";
     }
 
 

@@ -9,10 +9,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +21,7 @@ import java.security.Principal;
 public class UserController {
 
     /**
-     * Injected services
+     * Injected user and image services
      */
     private UserService userService;
 
@@ -41,7 +38,7 @@ public class UserController {
      * @param model
      * @return sign in page
      */
-    @RequestMapping(value = "/signin", method = RequestMethod.GET)
+    @GetMapping("/signin")
     public String showSignInForm(Model model) {
         return "users/signin";
     }
@@ -51,7 +48,7 @@ public class UserController {
      * @param model
      * @return sign up form
      */
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    @GetMapping("/signup")
     public String showUserForm(Model model) {
         model.addAttribute(new User());
         return "users/signup";
@@ -69,7 +66,7 @@ public class UserController {
      * @return redirect user to account page
      * @throws ServletException
      */
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @PostMapping("/signup")
     public String addUserFromForm(@Valid User user, BindingResult result, Model model, HttpServletRequest request,  @RequestParam(value = "image", required = false) MultipartFile image) throws ServletException {
         if (result.hasErrors()) {
             return "users/signup";
@@ -83,7 +80,7 @@ public class UserController {
     }
 
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE", "ROLE_ADMIN" })
-    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    @GetMapping("/account")
     public String showAccount(Principal principal, Model model, HttpServletRequest request) {
         if (!request.isUserInRole("ROLE_ADMIN")) {
             model.addAttribute(userService.selectUser(principal.getName()));
@@ -98,9 +95,10 @@ public class UserController {
      * @return user update form
      */
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
-    @RequestMapping(value = "/account/update", method = RequestMethod.GET)
-    public String showUserUpdateForm(Principal principal, Model model) {
+    @GetMapping("/account/update")
+    public String showUserUpdateForm(Principal principal, Model model,  @RequestParam(value="error", required = false) String error) {
         model.addAttribute(userService.selectUser(principal.getName()));
+        model.addAttribute("error", error);
         return "users/update";
     }
 
@@ -117,7 +115,7 @@ public class UserController {
      * @return user account page
      */
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
-    @RequestMapping(value = "/account/update", method = RequestMethod.POST)
+    @PostMapping("/account/update")
     public String updateUserFromForm(@Valid User user, BindingResult result, Model model, Principal principal,
                                      HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image)  {
         if(result.hasErrors()){
@@ -145,7 +143,7 @@ public class UserController {
      * @return redirect to signout
      */
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
-    @RequestMapping(value = "/account/delete", method = RequestMethod.POST)
+    @PostMapping("/account/delete")
     public String deleteAccount(@ModelAttribute("user") User user) {
         userService.deleteUser(user);
         return "redirect:/users/signout";

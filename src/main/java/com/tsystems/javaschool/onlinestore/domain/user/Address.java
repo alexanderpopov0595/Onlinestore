@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 
+/**
+ * Class represents user's address
+ */
 @Entity
 @Table(name = "addresses")
 public class Address implements Serializable {

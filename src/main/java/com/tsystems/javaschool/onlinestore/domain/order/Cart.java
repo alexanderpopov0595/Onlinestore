@@ -33,7 +33,7 @@ public class Cart implements Serializable {
     /**
      * Method returns product by id
      * @param id
-     * @return
+     * @return product
      */
    public Product getProduct(long id){
         for(Map.Entry<Product, Integer> entry: productMap.entrySet()){

@@ -19,7 +19,9 @@ import com.tsystems.javaschool.onlinestore.domain.category.Category;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
+/**
+ * Class represents product
+ */
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {

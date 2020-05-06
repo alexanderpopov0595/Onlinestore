@@ -21,6 +21,10 @@ public class MessageServiceImpl implements  MessageService{
         this.salesService=salesService;
     }
 
+
+    /**
+     * Method sends message to JMS broker
+     */
     @Override
     public void sendMessage() {
         messageSender.sendMessage(salesService.getTopProductsList());

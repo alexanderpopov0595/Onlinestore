@@ -18,19 +18,36 @@ public class ProductDaoImpl implements ProductDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Method adds product to database
+     * @param product
+     */
     public void addProduct(Product product) {
         entityManager.persist(product);
     }
 
+    /**
+     * Method updates product
+     * @param product
+     */
     public void updateProduct(Product product) {
         entityManager.merge(product);
     }
 
+    /**
+     *  Method returns product by id
+     * @param id
+     * @return product
+     */
     public Product selectProduct(long id) {
-        return (Product) entityManager.createQuery("SELECT p FROM Product p WHERE p.id=:id AND p.quantity>0").setParameter("id", id).getSingleResult();
+        return entityManager.find(Product.class, id);
     }
 
-
+    /**
+     * Method returns product list by search
+     * @param product
+     * @return product list
+     */
     public List<Product> searchProducts(ProductDTO product) {
         String SQL_SEARCH_QUERY=prepareSql(product);
         List<Product> productList=new ArrayList<>();
@@ -50,6 +67,12 @@ public class ProductDaoImpl implements ProductDao {
         }
         return productList;
     }
+
+    /**
+     * Method builds sql-query from getted product
+     * @param product
+     * @return sql-query
+     */
     public String prepareSql(ProductDTO product){
         String SQL_SELECT = "SELECT * FROM products ";
         String SQL_WHERE = " WHERE quantity>0 ";
@@ -92,16 +115,29 @@ public class ProductDaoImpl implements ProductDao {
         return SQL_SELECT + SQL_WHERE+SQL_NAME + SQL_PRICE + SQL_CATEGORY + SQL_PRODUCT_DETAILS;
     }
 
+    /**
+     * Method returns all products by category name
+     * @param category
+     * @return product list
+     */
     public List<Product> selectProductListByCategory(String category) {
-        return  entityManager.createQuery("SELECT p FROM Product p JOIN Category c ON p.category.id=c.id WHERE c.name=:category AND p.quantity>0")
-                .setParameter("category", category).getResultList();
+        return  entityManager.createQuery("SELECT p FROM Product p JOIN Category c ON p.category.id=c.id WHERE c.name=:category ")
+          .setParameter("category", category).getResultList();
 
     }
 
+    /**
+     * Method deletes product
+     * @param id
+     */
     public void deleteProduct(long id) {
         entityManager.createQuery("UPDATE Product p SET p.quantity=0 WHERE p.id=:id").setParameter("id", id)
                 .executeUpdate();
     }
+    /**
+     * Method deletes product details
+     * @param id
+     */
     public void deleteProductDetails(long id) {
         entityManager.createQuery("DELETE FROM ProductDetails pd WHERE pd.product.id=:id")
                 .setParameter("id", id)

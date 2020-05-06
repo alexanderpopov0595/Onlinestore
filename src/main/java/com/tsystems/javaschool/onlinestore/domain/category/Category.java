@@ -8,6 +8,9 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
+/**
+ * Class represents store's directory group
+ */
 @Entity
 @Table(name = "categories")
 public class Category implements Serializable {

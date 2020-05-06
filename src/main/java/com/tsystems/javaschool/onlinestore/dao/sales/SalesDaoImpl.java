@@ -12,21 +12,39 @@ import org.springframework.stereotype.Repository;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
 import com.tsystems.javaschool.onlinestore.domain.user.User;
 
+/**
+ * JPA implementation of sales dao
+ */
 @Repository
 public class SalesDaoImpl implements SalesDao {
 
+    /**
+     * Injected entity manager
+     */
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Method adds sale to database
+     * @param sales with information about purchased order
+     */
     public void addSales(Sales sales) {
         entityManager.persist(sales);
     }
 
+    /**
+     * Method deletes sales by order details id
+     * @param id of order details
+     */
     @Override
     public void restoreSales(long id) {
         entityManager.createQuery("DELETE FROM Sales s WHERE s.orderDetails.id=:id").setParameter("id", id).executeUpdate();
     }
 
+    /**
+     * Method returms top-10 products
+     * @return product list
+     */
     public List<Product> getTopProductsList() {
         List<Object[]> objList=entityManager.createNativeQuery("SELECT id, name, price, quantity, volume, weight, id_category FROM products "
                 + "JOIN ( "
@@ -51,6 +69,10 @@ public class SalesDaoImpl implements SalesDao {
         return productList;
     }
 
+    /**
+     * Method returns top-10 users
+     * @return user list
+     */
     public List<User> getTopUserList() {
         List<Object[]> objList=entityManager.createNativeQuery("SELECT id, firstName, lastName, email, birthday, login, password FROM users JOIN ( SELECT id_user, COUNT(id_user) AS count FROM sales GROUP BY id_user ORDER BY count DESC) AS T2 ON users.id=T2.id_user WHERE status='ACTIVE' ORDER BY T2.count DESC LIMIT 10").getResultList();
         List<User> userList=new ArrayList<>();
@@ -68,6 +90,10 @@ public class SalesDaoImpl implements SalesDao {
         return userList;
     }
 
+    /**
+     * Method returns sales per week
+     * @return sales list
+     */
     public List<Sales> getWeekSales() {
         List<Object[]>  objList=entityManager.createNativeQuery( "SELECT date, revenue, id_order, id_user FROM sales WHERE WEEK(date)=WEEK(CURDATE())").getResultList();
         List<Sales> saleList=new ArrayList<>();
@@ -88,6 +114,10 @@ public class SalesDaoImpl implements SalesDao {
         return saleList;
     }
 
+    /**
+     * Method returns sales per month
+     * @return sales list
+     */
     public List<Sales> getMonthSales() {
         List<Object[]>  objList=entityManager.createNativeQuery( "SELECT date, revenue, id_order, id_user FROM sales WHERE MONTH(date)=MONTH(CURDATE())").getResultList();
         List<Sales> saleList=new ArrayList<>();

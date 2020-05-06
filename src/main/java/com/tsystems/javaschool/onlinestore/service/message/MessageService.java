@@ -6,7 +6,7 @@ package com.tsystems.javaschool.onlinestore.service.message;
 public interface MessageService {
 
     /**
-     * Method sends message
+     * Method sends message to JMS broker
      */
     void sendMessage();
 }

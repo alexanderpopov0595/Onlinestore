@@ -10,8 +10,10 @@ public interface ImageService {
     /**
      * Method checks image's format
      * @param image
+     * @param folder (users, products, etc)
+     * @param id (user id, product id, etc)
      */
-  void validateImage(MultipartFile image);
+  void validateImage(MultipartFile image, String folder, long id);
 
     /**
      * Method saves image to server folder

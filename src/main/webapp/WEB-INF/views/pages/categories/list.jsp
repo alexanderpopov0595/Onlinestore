@@ -10,25 +10,49 @@
                 </a>
             </li>
             <c:forEach var="category" items="${categoryList}">
-                <li class="dropdown">
-                    <a href="<c:url value="/products/categories/${category.name}"/>">
-                            ${category.name}
-                    </a>
+                <c:if test="${category.status=='ACTIVE'}">
+                    <li class="dropdown">
+                        <a href="<c:url value="/products/categories/${category.name}"/>">
+                                ${category.name}
+                        </a>
+                        <sec:authorize access="hasRole('EMPLOYEE')">
+                            <ul class="dropdown-content">
+                                <li>
+                                    <a class="active" href="<c:url value="/categories/${category.id}/update"/>">
+                                        Update category
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="delete" href="<c:url value="/categories/${category.id}/delete"/>">
+                                        Delete category
+                                    </a>
+                                </li>
+                            </ul>
+                        </sec:authorize>
+                    </li>
+                </c:if>
+                <c:if test="${category.status!='ACTIVE'}">
                     <sec:authorize access="hasRole('EMPLOYEE')">
-                        <ul class="dropdown-content">
-                            <li>
-                                <a class="active" href="<c:url value="/categories/${category.id}/update"/>">
-                                    Update category
-                                </a>
-                            </li>
-                            <li>
-                                <a class="delete" href="<c:url value="/categories/${category.id}/delete"/>">
-                                    Delete category
-                                </a>
-                            </li>
-                        </ul>
+                        <li class="dropdown">
+                            <a href="<c:url value="/products/categories/${category.name}"/>">
+                                    ${category.name}
+                            </a>
+
+                                <ul class="dropdown-content">
+                                    <li>
+                                        <a class="active" href="<c:url value="/categories/${category.id}/update"/>">
+                                            Update category
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="delete" href="<c:url value="/categories/${category.id}/delete"/>">
+                                            Delete category
+                                        </a>
+                                    </li>
+                                </ul>
+                        </li>
                     </sec:authorize>
-                </li>
+                </c:if>
             </c:forEach>
             <sec:authorize access="hasRole('EMPLOYEE')">
                 <li>
@@ -42,16 +66,37 @@
     <div class="content">
         <div class="gallery">
             <c:forEach var="category" items="${categoryList}" varStatus="i">
-                <div style="text-align: center">
-                    <a style="text-decoration: none; color:black" href="<c:url value="/products/categories/${category.name}"/>">
-                        <img  src="<c:url value="/images/categories/${category.id}.jpg"/>" width="300"
-                             border="0" align="middle"
-                             onError="this.src='<c:url value="/resources/img"/>/category.jpg';" />
+                <c:if test="${category.status=='ACTIVE'}">
+                    <div style="text-align: center">
+                        <a style="text-decoration: none; color:black" href="<c:url value="/products/categories/${category.name}"/>">
+                            <img  src="<c:url value="/images/categories/${category.id}.jpg"/>" width="300"
+                                  border="0" align="middle"
+                                  onError="this.src='<c:url value="/resources/img"/>/category.jpg';" />
+                            <br/>
+                            <c:out value="${category.name}"/>
+                        </a>
                         <br/>
-                        <c:out value="${category.name}"/>
-                    </a>
-                    <br/>
-                </div>
+                    </div>
+                </c:if>
+                <c:if test="${category.status!='ACTIVE'}">
+                    <sec:authorize access="hasRole('EMPLOYEE')">
+                        <div style="text-align: center">
+                            <a style="text-decoration: none; color:black" href="<c:url value="/products/categories/${category.name}"/>">
+                                <img  src="<c:url value="/images/categories/${category.id}.jpg"/>" width="300"
+                                      border="0" align="middle"
+                                      onError="this.src='<c:url value="/resources/img"/>/category.jpg';" />
+                                <br/>
+                                <c:out value="${category.name}"/>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="button" class="form-button"  value="Category is not allowed" disabled/>
+                                        </td>
+                                    </tr>
+                            </a>
+                            <br/>
+                        </div>
+                    </sec:authorize>
+                </c:if>
             </c:forEach>
         </div>
     </div>

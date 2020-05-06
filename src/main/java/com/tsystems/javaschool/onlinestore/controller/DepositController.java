@@ -7,9 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -38,7 +36,7 @@ public class DepositController {
      * @return form page
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/addDeposit", method = RequestMethod.GET)
+    @GetMapping("/addDeposit")
     public String showDepositForm(Model model) {
         model.addAttribute("deposit", new Deposit());
         return "deposits/form";
@@ -52,7 +50,7 @@ public class DepositController {
      */
 
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/addDeposit", method = RequestMethod.POST)
+    @PostMapping("/addDeposit")
     public String addDepositFromForm(@Valid Deposit deposit, BindingResult result, Principal principal) {
         if(result.hasErrors()){
             return "deposits/form";
@@ -68,7 +66,7 @@ public class DepositController {
      * @return deposit page
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/showDeposit", method = RequestMethod.GET)
+    @GetMapping("/showDeposit")
     public String showDeposit(Model model, Principal principal) {
         model.addAttribute("deposit", depositService.selectDeposit(principal.getName()));
         return "deposits/view";
@@ -82,7 +80,7 @@ public class DepositController {
      */
 
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/updateDeposit", method = RequestMethod.GET)
+    @GetMapping("/updateDeposit")
     public String showDepositUpdateForm(Model model, Principal principal) {
         model.addAttribute("deposit", depositService.selectDeposit(principal.getName()));
         return "deposits/update";
@@ -95,7 +93,7 @@ public class DepositController {
      * @return redirect to deposit page
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/updateDeposit", method = RequestMethod.POST)
+    @PostMapping("/updateDeposit")
     public String updateDepositFromForm(@Valid Deposit deposit, BindingResult result) {
         if(result.hasErrors()){
             return "deposits/update";
@@ -111,7 +109,7 @@ public class DepositController {
      * @return deposit page
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/updateDepositBalance", method = RequestMethod.POST)
+    @PostMapping("/updateDepositBalance")
     public String updateDepositBalanceFromForm(@ModelAttribute("deposit") Deposit deposit) {
         depositService.updateDepositBalance(deposit);
         return "redirect:/deposits/showDeposit";
@@ -124,7 +122,7 @@ public class DepositController {
      * @return redirect to user account page
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/deleteDeposit", method = RequestMethod.POST)
+    @PostMapping( "/deleteDeposit")
     public String deleteDepositFromForm(@ModelAttribute("deposit") Deposit deposit) {
         depositService.deleteDeposit(deposit);
         return "redirect:/users/account";

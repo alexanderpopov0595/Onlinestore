@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import com.tsystems.javaschool.onlinestore.enums.Status;
 
+/**
+ * Class represents user
+ */
 @Entity
 @Table(name = "users")
 public class User implements Serializable {

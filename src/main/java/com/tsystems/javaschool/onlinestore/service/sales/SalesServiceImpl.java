@@ -45,7 +45,10 @@ public class SalesServiceImpl implements SalesService {
             }
         }
     }
-
+    /**
+     * Method removes order details from sales table
+     * @param orderDetailsList
+     */
     @Override
     public void restoreSales(List<OrderDetails> orderDetailsList) {
         for (OrderDetails od : orderDetailsList) {
@@ -66,35 +69,31 @@ public class SalesServiceImpl implements SalesService {
         return productList;
     }
 
+    /**
+     * Method returns top-10 users
+     * @return users list
+     */
     public List<User> getTopUserList() {
         return salesDao.getTopUserList();
     }
 
     /**
-     * Method loads week sales and loads user and product for every sale
+     * Method loads week sales
      *
      * @return week sales list
      */
     public List<Sales> getWeekSales() {
-        List<Sales> salesList = salesDao.getWeekSales();
-        for (Sales s : salesList) {
-            s.getUser();
-            s.getProduct();
-        }
-        return salesList;
+
+        return salesDao.getWeekSales();
     }
 
     /**
-     * Method loads month sales and loads user and product for every sale
+     * Method loads month sales
      *
      * @return month sales list
      */
     public List<Sales> getMonthSales() {
-        List<Sales> salesList = salesDao.getMonthSales();
-        for (Sales s : salesList) {
-            s.getUser();
-            s.getProduct();
-        }
-        return salesList;
+
+        return salesDao.getMonthSales();
     }
 }

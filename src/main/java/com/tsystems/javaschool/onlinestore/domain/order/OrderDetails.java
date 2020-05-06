@@ -6,6 +6,9 @@ import javax.persistence.*;
 
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
 
+/**
+ * Class represents information about order's products and their quantities
+ */
 @Entity
 @Table(name = "order_details")
 public class OrderDetails implements Serializable {

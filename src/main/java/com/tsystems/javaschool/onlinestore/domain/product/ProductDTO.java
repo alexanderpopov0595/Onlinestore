@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class represents product dto
+ * Class represents product dto, used in search operations
  */
 public class ProductDTO implements Serializable {
 

@@ -23,7 +23,7 @@
         </div>
         <div class="form-element">
             <label>Add to balance:</label>
-            <input type="text" class="form-input" name="balance" placeholder="+ value"  required/>
+            <input type="number" class="form-input" name="balance" placeholder="+ value"  required/>
         </div>
         <div class="form-element">
             <input type="submit" class="form-button" value="Update balance" formaction="<c:url value="/deposits/updateDepositBalance"/>"/>

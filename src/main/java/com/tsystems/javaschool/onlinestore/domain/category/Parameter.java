@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Class represents category specific parameter
+ */
 @Entity
 @Table(name = "parameters")
 public class Parameter implements Serializable {

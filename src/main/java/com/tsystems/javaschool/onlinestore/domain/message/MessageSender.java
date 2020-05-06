@@ -11,11 +11,17 @@ import org.springframework.stereotype.Component;
 import javax.jms.*;
 import java.util.List;
 
+/**
+ * Class represents logic to send messages to JMS broker
+ */
 @Component
 public class MessageSender {
 
     private static final Logger logger= Logger.getLogger(MessageSender.class);
 
+    /**
+     * Injected JMS template
+     */
     private JmsTemplate jmsTemplate;
 
     @Autowired
@@ -23,6 +29,10 @@ public class MessageSender {
         this.jmsTemplate=jmsTemplate;
     }
 
+    /**
+     * Method creates JSON-message from product list and sends message to broker
+     * @param productList
+     */
     public void sendMessage(final List<Product> productList) {
 
         jmsTemplate.send(new MessageCreator() {

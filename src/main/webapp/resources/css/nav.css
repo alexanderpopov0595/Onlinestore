@@ -28,6 +28,7 @@ li a:hover:not(.active) {
 .nav-search{
     padding: 12px 12px;
     margin: 0;
+    color:white;
 }
 .nav-search input[type=submit]{
     background-color: rgba(0, 191, 255, 0.9);

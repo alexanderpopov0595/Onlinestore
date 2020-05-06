@@ -2,6 +2,8 @@ package com.tsystems.javaschool.onlinestore.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.ServletRegistration;
+
 
 public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -20,5 +22,8 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
         return new String[]{"/"};
     }
 
-
+    @Override
+    public void customizeRegistration(ServletRegistration.Dynamic registration) {
+        registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+    }
 }

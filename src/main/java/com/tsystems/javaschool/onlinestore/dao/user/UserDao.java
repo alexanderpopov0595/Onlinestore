@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserDao {
 
     /**
-     * Method adds user to database     *
+     * Method adds user to database
      * @param user
      */
     void addUser(User user);

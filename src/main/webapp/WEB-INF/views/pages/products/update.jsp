@@ -8,6 +8,7 @@
         <input type="hidden" name="id" value="${product.id}"/>
         <div class="form-element">
             <img src="<c:url value="/images/products/${product.id}.jpg"/>" width="300" border="0" align="center"	onError="this.src='<c:url value="/resources/img"/>/product.jpg';" />
+            <p class="errors">${error}</p>
         </div>
         <div class="form-group">
             <label>Upload image</label>

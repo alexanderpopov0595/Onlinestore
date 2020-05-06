@@ -10,7 +10,8 @@ function rewriteForms(){
     for(var i=0; i<forms.length; i++){
         console.log("id="+forms[i].id);
         forms[i].getElementsByTagName("input")[0].setAttribute("name", "orderDetailsList["+i+"].product.id");
-        forms[i].getElementsByTagName("input")[1].setAttribute("name", "orderDetailsList["+i+"].quantity");
+        forms[i].getElementsByTagName("input")[1].setAttribute("name", "orderDetailsList["+i+"].id");
+        forms[i].getElementsByTagName("input")[2].setAttribute("name", "orderDetailsList["+i+"].quantity");
 
     }
 

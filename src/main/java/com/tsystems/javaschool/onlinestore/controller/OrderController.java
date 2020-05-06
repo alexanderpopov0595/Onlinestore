@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import com.tsystems.javaschool.onlinestore.domain.order.Cart;
 import com.tsystems.javaschool.onlinestore.domain.order.Order;
 import com.tsystems.javaschool.onlinestore.enums.DeliveryType;
@@ -52,9 +49,10 @@ public class OrderController {
      * @return order form page
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/addOrder", method = RequestMethod.GET)
+    @GetMapping( "/addOrder")
     public String showOrderForm(HttpSession session, Principal principal, Model model) {
         Cart cart = cartService.getCart((Cart)session.getAttribute("cart"));
+        cartService.validateCart(cart);
         model.addAttribute("productMap", cart.getProductMap());
         model.addAttribute("user", userService.selectUser(principal.getName()));
         model.addAttribute("order", new Order());
@@ -66,9 +64,10 @@ public class OrderController {
     }
 
     @Secured("ROLE_USER")
-    @RequestMapping(value = "/addOrder/{id}", method = RequestMethod.GET)
+    @GetMapping("/addOrder/{id}")
     public String showOrderForm(@PathVariable long id,HttpSession session, Principal principal, Model model){
         Cart cart = cartService.getCart((Cart)session.getAttribute("cart"));
+        cartService.validateCart(cart);
         model.addAttribute("productMap", cartService.addProductToOrder(cart, id));
         model.addAttribute("user", userService.selectUser(principal.getName()));
         model.addAttribute("order", new Order());
@@ -87,7 +86,8 @@ public class OrderController {
      * @return
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value = {"/addOrder",  "/addOrder/**"}, method = RequestMethod.POST)
+    //@RequestMapping(value = {"/addOrder",  "/addOrder/**"}, method = RequestMethod.POST)
+    @PostMapping(value = {"/addOrder",  "/addOrder/**"})
     public String addOrderFromForm(@ModelAttribute("order") Order order, HttpSession session, Model model) {
         long orderID=orderService.addOrder(order);
         Cart cart = cartService.getCart((Cart)session.getAttribute("cart"));
@@ -97,7 +97,7 @@ public class OrderController {
     }
 
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping("/{id}")
     public String showOrder(@PathVariable long id, Principal principal, Model model, HttpServletRequest request) {
         Order order = orderService.selectOrder(id, principal.getName(), request.isUserInRole("ROLE_EMPLOYEE"));
             model.addAttribute("order", order);
@@ -106,7 +106,7 @@ public class OrderController {
     }
 
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
-    @RequestMapping(value = "/{id}/update", method = RequestMethod.GET)
+    @GetMapping("/{id}/update")
     public String showOrderUpdateForm(@PathVariable long id, Model model, Principal principal,  HttpServletRequest request) {
         Order order = orderService.selectOrder(id, principal.getName(), request.isUserInRole("ROLE_EMPLOYEE"));
         model.addAttribute("order", order);
@@ -118,7 +118,7 @@ public class OrderController {
     }
 
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
-    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    @PostMapping("/{id}/update")
     public String updateUserOrderFromForm(@ModelAttribute("order") Order order) {
         orderService.updateOrder(order);
         return "redirect:/orders/" + order.getId();
@@ -131,7 +131,7 @@ public class OrderController {
      * @return order list
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @GetMapping("/all")
     public String showOrdersByOrderStatus(Model model) {
         model.addAttribute("orderList", orderService.selectOrderList());
         return "orders/list";
@@ -144,7 +144,7 @@ public class OrderController {
      * @return
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/status/{status}", method = RequestMethod.GET)
+    @GetMapping("/status/{status}")
     public String showOrdersByOrderStatus(@PathVariable String status, Model model) {
         model.addAttribute("orderList", orderService.selectOrderListByOrderStatus(status));
         return "orders/list";
@@ -157,7 +157,7 @@ public class OrderController {
      * @return
      */
     @Secured( "ROLE_EMPLOYEE" )
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @GetMapping("/user/{id}")
     public String showUserOrders(@PathVariable long id ,Model model) {
         model.addAttribute("orderList", orderService.selectOrderList(id));
         return "orders/user";
@@ -171,7 +171,7 @@ public class OrderController {
      * @return
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value="/myorders", method=RequestMethod.GET)
+    @GetMapping("/myorders")
     public String showAllUserOrders(Principal principal, Model model){
         model.addAttribute("orderList", orderService.selectOrderList(principal.getName()));
         return "orders/list";
@@ -185,24 +185,25 @@ public class OrderController {
      * @return
      */
     @Secured("ROLE_USER")
-    @RequestMapping(value="/myorders/{status}", method=RequestMethod.GET)
+    @GetMapping("/myorders/{status}")
     public String showUserOrdersByStatus(@PathVariable String status, Principal principal, Model model){
         model.addAttribute("orderList", orderService.selectOrderListByOrderStatus(principal.getName(), status));
         return "orders/list";
     }
 
     @Secured({ "ROLE_USER", "ROLE_EMPLOYEE" })
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    @GetMapping("/{id}/delete")
     public String deleteUserOrder(@PathVariable long id, Principal principal,  HttpServletRequest request) {
         orderService.deleteOrder(id, principal.getName(), request.isUserInRole("ROLE_EMPLOYEE"));
         return "redirect:/users/account";
     }
 
     @Secured(("ROLE_EMPLOYEE"))
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @PostMapping("/search")
     public String searchOrder(HttpServletRequest request, Model model){
         if(request.getParameter("searchBy").equals("id")){
-            return "redirect:/orders/"+request.getParameter("parameter");
+            Long id=Long.parseLong(request.getParameter("parameter"));
+            return "redirect:/orders/"+id;
         }
         model.addAttribute("orderList", orderService.selectOrderList(request.getParameter("parameter")));
         return "orders/user";

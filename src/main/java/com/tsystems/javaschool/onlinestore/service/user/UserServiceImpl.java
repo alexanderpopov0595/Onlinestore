@@ -3,7 +3,6 @@ package com.tsystems.javaschool.onlinestore.service.user;
 import javax.transaction.Transactional;
 import com.tsystems.javaschool.onlinestore.enums.Status;
 import com.tsystems.javaschool.onlinestore.exceptions.LoginIsCurrentlyExisting;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static final Logger logger= Logger.getLogger(UserServiceImpl.class);
+
     /**
      * Injected user dao
      */

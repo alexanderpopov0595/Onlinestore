@@ -70,15 +70,28 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
-
+    /**
+     * Method returns products list by category
+     * @param category
+     * @return product list
+     */
     public List<Product> selectProductListByCategory(String category) {
         return productDao.selectProductListByCategory(category);
     }
 
+    /**
+     * Method return product list by search
+     * @param product
+     * @return result list
+     */
     public List<Product> searchProducts(ProductDTO product) {
         return productDao.searchProducts(product);
     }
 
+    /**
+     * Method deletes product and product details by id
+     * @param id product
+     */
     public void deleteProduct(long id) {
         productDao.deleteProduct(id);
     }

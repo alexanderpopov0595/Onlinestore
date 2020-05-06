@@ -34,7 +34,7 @@
                     <input type="text" name="parameter" placeholder="Search orders for..."/>
                     <input type="radio"  name="searchBy" value="id" checked>Order id
                     <input type="radio"  name="searchBy" value="login">Login
-                    <input type="submit" class="button other">
+                    <input type="submit" class="button other" value="Search">
                 </form>
             </li>
             </sec:authorize>

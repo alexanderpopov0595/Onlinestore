@@ -55,8 +55,8 @@
                         </a>
                     </td>
                     <td>
-                        <a href="<c:url value="/orders/users/${sales.user.id}"/>">
-                                ${sales.user.firstName} ${sales.user.lastName}
+                        <a href="<c:url value="/orders/user/${sales.user.id}"/>">
+                                ${sales.user.id}
                         </a>
                     </td>
                 </tr>

@@ -30,7 +30,7 @@ public interface CategoryService {
 
     /**
      * Method returns category list
-     * @return
+     * @return category list
      */
      List<Category> selectCategoryList();
 

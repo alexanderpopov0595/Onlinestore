@@ -25,6 +25,9 @@ import com.tsystems.javaschool.onlinestore.enums.OrderStatus;
 import com.tsystems.javaschool.onlinestore.enums.PaymentStatus;
 import com.tsystems.javaschool.onlinestore.enums.PaymentType;
 
+/**
+ * Class represents order with information about chosen products, user, delivery address and order status
+ */
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {

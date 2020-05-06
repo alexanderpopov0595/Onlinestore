@@ -17,6 +17,9 @@ import javax.persistence.Table;
 import com.tsystems.javaschool.onlinestore.domain.product.Product;
 import com.tsystems.javaschool.onlinestore.domain.user.User;
 
+/**
+ * Class represents store's sales statistic
+ */
 @Entity
 @Table(name="sales")
 public class Sales implements Serializable{

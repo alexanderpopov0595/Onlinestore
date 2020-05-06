@@ -37,7 +37,7 @@ public class CategoryController {
      * @param model
      * @return categories page
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String showCategoryList(Model model) {
         model.addAttribute("categoryList", categoryService.selectCategoryList());
         return "categories/list";
@@ -49,7 +49,7 @@ public class CategoryController {
      * @return form
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/addCategory", method = RequestMethod.GET)
+    @GetMapping("/addCategory")
     public String showCategoryForm(Model model) {
         model.addAttribute(new Category());
         return "categories/form";
@@ -65,7 +65,7 @@ public class CategoryController {
      * @return categories page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
+    @PostMapping("/addCategory")
     public String addCategoryFromForm(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model,  @RequestParam(value = "image", required = false) MultipartFile image) {
         if(result.hasErrors()){
             return "categories/form";
@@ -81,9 +81,10 @@ public class CategoryController {
      * @return category update page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/{id}/update", method = RequestMethod.GET)
-    public String showCategoryEditForm(@PathVariable long id, Model model) {
+    @GetMapping("/{id}/update")
+    public String showCategoryUpdateForm(@PathVariable long id, Model model, @RequestParam(value="error", required = false) String error) {
         model.addAttribute(categoryService.selectCategory(id));
+        model.addAttribute("error", error);
         return "categories/update";
     }
 
@@ -95,7 +96,7 @@ public class CategoryController {
      * @return category page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    @PostMapping("/{id}/update")
     public String updateCategoryFromForm(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model,   @RequestParam(value = "image", required = false) MultipartFile image) {
         if(result.hasErrors()){
             return "categories/update";
@@ -116,7 +117,7 @@ public class CategoryController {
      * @return categories page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    @PostMapping("/{id}/delete")
     public String deleteCategory(@ModelAttribute("category") Category category) {
         categoryService.deleteCategory(category);
         return "redirect:/categories";

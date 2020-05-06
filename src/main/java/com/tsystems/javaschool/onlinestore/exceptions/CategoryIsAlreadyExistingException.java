@@ -2,6 +2,9 @@ package com.tsystems.javaschool.onlinestore.exceptions;
 
 import com.tsystems.javaschool.onlinestore.domain.category.Category;
 
+/**
+ * Class represents exception which thrown while employee trying to add category with already existing name
+ */
 public class CategoryIsAlreadyExistingException extends RuntimeException {
 
     private final Category category;

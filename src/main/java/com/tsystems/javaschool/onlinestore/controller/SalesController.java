@@ -5,8 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 /**
  * Controller is responsible for requests starting with /sales
@@ -30,7 +31,7 @@ public class SalesController {
      * @param model
      * @return products top page
      */
-    @RequestMapping(value="/productsTop", method= RequestMethod.GET)
+    @GetMapping("/productsTop")
     public String showTopProducts(Model model){
         model.addAttribute("topProductsList", salesService.getTopProductsList());
         return "sales/productsTop";
@@ -42,7 +43,7 @@ public class SalesController {
      * @return users top page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value="/usersTop", method = RequestMethod.GET)
+    @GetMapping("/usersTop")
     public String showTopUsers(Model model){
         model.addAttribute("topUsersList", salesService.getTopUserList());
         return "sales/usersTop";
@@ -54,7 +55,7 @@ public class SalesController {
      * @return week sales page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value="/weekSales", method = RequestMethod.GET)
+    @GetMapping("/weekSales")
     public String showWeekSales(Model model){
         model.addAttribute("salesList", salesService.getWeekSales());
         return "sales/list";
@@ -66,7 +67,7 @@ public class SalesController {
      * @return month sales page
      */
     @Secured("ROLE_EMPLOYEE")
-    @RequestMapping(value="/monthSales", method = RequestMethod.GET)
+    @GetMapping("/monthSales")
     public String showMonthSales(Model model){
         model.addAttribute("salesList", salesService.getMonthSales());
         return "sales/list";

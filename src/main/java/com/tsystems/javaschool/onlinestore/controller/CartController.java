@@ -5,9 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import com.tsystems.javaschool.onlinestore.domain.order.Cart;
 import com.tsystems.javaschool.onlinestore.service.cart.CartService;
 
@@ -18,6 +18,9 @@ import com.tsystems.javaschool.onlinestore.service.cart.CartService;
 @RequestMapping("/cart")
 public class CartController {
 
+    /**
+     * Injected cart service
+     */
     private CartService cartService;
 
     @Autowired
@@ -31,7 +34,7 @@ public class CartController {
      * @param session
      * @return cart page
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String showCart(Model model, HttpSession session) {
         model.addAttribute("cart", cartService.getCart((Cart)session.getAttribute("cart")));
         return "cart";
@@ -44,7 +47,7 @@ public class CartController {
      * @param request
      * @return previous product page
      */
-    @RequestMapping(value = "/addToCart/{id}", method = RequestMethod.GET)
+    @GetMapping("/addToCart/{id}")
     public String addProductToCart(@PathVariable long id, HttpSession session, HttpServletRequest request) {
         Cart cart = cartService.getCart((Cart)session.getAttribute("cart"));
         cartService.addProductToCart(cart, id);
@@ -58,7 +61,7 @@ public class CartController {
      * @param session
      * @return cart page
      */
-    @RequestMapping(value = "/removeAll", method = RequestMethod.GET)
+    @GetMapping("/removeAll")
     public String removeAllFromCart(HttpSession session) {
         session.setAttribute("cart", new Cart());
         return "redirect:/cart";
@@ -70,7 +73,7 @@ public class CartController {
      * @param session
      * @return cart page
      */
-    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+    @GetMapping( "/remove/{id}")
     public String removeProductFromCart(@PathVariable Long id, HttpSession session) {
         Cart cart = cartService.getCart((Cart)session.getAttribute("cart"));
             cart.removeProduct(id);
@@ -84,7 +87,7 @@ public class CartController {
      * @param session
      * @return cart page
      */
-    @RequestMapping(value = "/removeFromCart/{id}", method = RequestMethod.GET)
+    @GetMapping( "/removeFromCart/{id}")
     public String removeFromCart(@PathVariable long id, HttpSession session){
         Cart cart = cartService.getCart((Cart)session.getAttribute("cart"));
         cart.decrementProductQuantity(id);

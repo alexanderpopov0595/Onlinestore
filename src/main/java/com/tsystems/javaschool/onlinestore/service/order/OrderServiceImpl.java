@@ -27,6 +27,9 @@ import com.tsystems.javaschool.onlinestore.service.sales.SalesService;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    /**
+     * Injected services
+     */
     private OrderDao orderDao;
 
     private SalesService salesService;
@@ -203,35 +206,60 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+    /**
+     * Method returns all orders
+     * @return order list
+     */
     @Transactional
     public List<Order> selectOrderList() {
         return orderDao.selectOrderList();
     }
 
+    /**
+     * Method returns all orders by user login
+     * @param login
+     * @return
+     */
     @Transactional
     public List<Order> selectOrderList(String login) {
         return orderDao.selectOrderList(login);
     }
+
+    /**
+     * Method returns all orders by user id
+     * @param id
+     * @return
+     */
     @Transactional
     public List<Order> selectOrderList(long id) {
         return orderDao.selectOrderList(id);
     }
 
+    /**
+     * Method returns orders by order status
+     * @param orderStatus
+     * @return
+     */
     @Transactional
     public List<Order> selectOrderListByOrderStatus(String orderStatus) {
         return orderDao.selectOrderListByOrderStatus(OrderStatus.valueOf(orderStatus));
     }
 
+    /**
+     * Method returns orders by user id and orders status
+     * @param login
+     * @param orderStatus
+     * @return
+     */
     @Transactional
     public List<Order> selectOrderListByOrderStatus( String login, String orderStatus) {
-
-
         return orderDao.selectOrderListByOrderStatus(login, OrderStatus.valueOf(orderStatus));
-
     }
 
     /**
      * Method restores deposit balance
+     * @param id
+     * @param orderDetailsList
      */
     public void restoreDeposit(long id, List<OrderDetails> orderDetailsList) {
         Deposit deposit = depositDao.selectUserDeposit(id);
@@ -240,16 +268,17 @@ public class OrderServiceImpl implements OrderService {
         deposit.setBalance(balance + total);
         depositDao.updateDepositBalance(deposit);
     }
+
     /**
      * Method restores sales
+     * @param orderDetailsList
      */
     public void restoreSales(List<OrderDetails> orderDetailsList) {
         salesService.restoreSales(orderDetailsList);
     }
 
     /**
-     * Method restores product quantity
-     *
+     * Method restores product quantity     *
      * @param orderDetailsList
      */
     public void restoreOrderProductQuantity(List<OrderDetails> orderDetailsList) {
@@ -279,7 +308,7 @@ public class OrderServiceImpl implements OrderService {
             orderDao.deleteOrderDetails(od.getId());
         }
         orderDao.deleteOrder(order.getId());
-        messageService.sendMessage();
+
 
     }
 }
